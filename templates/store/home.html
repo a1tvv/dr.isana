@@ -1,0 +1,84 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}ART SOFFIO — Studio di Moda Cosmetica{% endblock %}
+{% block content %}
+<section class="hero container">
+  <a href="/catalog/?sale=1" class="hero-banner">
+    <img src="{% static 'store/img/hero.jpg' %}" alt="Anti-age — быстрая регенерация">
+  </a>
+</section>
+
+<section class="section container">
+  <div class="section-head">
+    <h2>Хит продаж</h2>
+    <a href="/catalog/" class="section-link">Смотреть все</a>
+  </div>
+
+  <div class="product-grid product-grid--4">
+    {% for product in bestsellers|slice:':4' %}
+      {% include 'store/partials/product_card.html' with product=product %}
+    {% empty %}
+      {% for item in demo_products %}
+        {% include 'store/partials/product_card.html' with product=item %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="promo-grid container">
+  <a class="promo-card" href="/catalog/" aria-label="Каталог">
+    <img src="{% static 'store/img/banner_catalog.jpg' %}" alt="Каталог">
+    <div class="promo-overlay"></div>
+    <div class="promo-caption">
+      <span>Каталоги</span>
+      <small>Смотреть все каталоги</small>
+    </div>
+  </a>
+  <a class="promo-card" href="/catalog/?sale=1" aria-label="Акции">
+    <img src="{% static 'store/img/banner_sale.jpg' %}" alt="Акции">
+    <div class="promo-overlay"></div>
+    <div class="promo-caption">
+      <span>Акции</span>
+      <small>Смотреть все акции</small>
+    </div>
+  </a>
+</section>
+
+<section class="section section--categories container">
+  <div class="section-title-center">Мир красоты и ухода</div>
+  <div class="category-grid">
+    <a class="category-card category-card--pink" href="/catalog/?category=makeup">
+      <img src="{% static 'store/img/cat_makeup.jpg' %}" alt="Макияж">
+      <span>Макияж</span>
+    </a>
+    <a class="category-card category-card--cream" href="/catalog/?category=skin">
+      <img src="{% static 'store/img/cat_skin.jpg' %}" alt="Уход за кожей">
+      <span>Уход за кожей</span>
+    </a>
+    <a class="category-card category-card--lilac" href="/catalog/?category=hair">
+      <img src="{% static 'store/img/cat_hair.jpg' %}" alt="Уход за волосами">
+      <span>Уход за волосами</span>
+    </a>
+    <a class="category-card category-card--blue" href="/catalog/?category=accessories">
+      <img src="{% static 'store/img/cat_acc.jpg' %}" alt="Аксессуары">
+      <span>Аксессуары</span>
+    </a>
+  </div>
+</section>
+
+<section class="new-products container">
+  <a class="new-banner" href="/catalog/?new=1">
+    <img src="{% static 'store/img/novelty.jpg' %}" alt="Новинки">
+    <div class="new-banner-copy"><strong>Новинки</strong><span>Смотрите все новинки</span></div>
+  </a>
+  <div class="product-grid product-grid--2">
+    {% for product in new_products|slice:':2' %}
+      {% include 'store/partials/product_card.html' with product=product %}
+    {% empty %}
+      {% for item in demo_products|slice:':2' %}
+        {% include 'store/partials/product_card.html' with product=item %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

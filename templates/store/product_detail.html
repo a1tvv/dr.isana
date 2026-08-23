@@ -1,0 +1,25 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}{{ product.name }} — ART SOFFIO{% endblock %}
+{% block content %}
+<section class="product-detail container">
+  <div class="detail-image">
+    {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% else %}
+      <img src="{% static 'store/img/prod1.jpg' %}" alt="{{ product.name }}">
+    {% endif %}
+  </div>
+  <div class="detail-info">
+    <div class="product-meta">ART SOFFIO</div>
+    <h1>{{ product.name }}</h1>
+    {% if product.description %}<p class="detail-description">{{ product.description }}</p>{% endif %}
+    <div class="detail-price">{{ product.price }} ₸ {% if product.old_price %}<del>{{ product.old_price }} ₸</del>{% endif %}</div>
+    <form action="/cart/add/{{ product.id }}/" method="post" class="detail-form">
+      {% csrf_token %}
+      <label>Количество <input type="number" name="quantity" value="1" min="1"></label>
+      <button class="btn btn-dark btn-large" type="submit">Добавить в корзину</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

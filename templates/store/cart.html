@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+{% block title %}Корзина — ART SOFFIO{% endblock %}
+{% block content %}
+<section class="cart-page container">
+  <div class="eyebrow">ART SOFFIO</div>
+  <h1>Корзина</h1>
+  {% if cart_items %}
+    <div class="cart-table">
+      {% for item in cart_items %}
+        <div class="cart-row">
+          <div><strong>{{ item.product.name }}</strong><span>{{ item.quantity }} шт.</span></div>
+          <div>{{ item.total }} ₸</div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="cart-total"><span>Итого</span><strong>{{ cart_total }} ₸</strong></div>
+    <a class="btn btn-dark btn-large" href="/checkout/">Оформить заказ</a>
+  {% else %}
+    <div class="empty-state">Корзина пуста. <a href="/catalog/">Перейти в каталог</a></div>
+  {% endif %}
+</section>
+{% endblock %}

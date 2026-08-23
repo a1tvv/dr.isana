@@ -1,0 +1,23 @@
+<article class="product-card">
+  <a class="product-image" href="{{ product.get_absolute_url|default:'#' }}">
+    {% load static %}
+{% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+    {% elif product.preview_image %}
+      <img src="{{ product.preview_image }}" alt="{{ product.name }}" loading="lazy">
+    {% else %}
+      <img src="{% static 'store/img/prod1.jpg' %}" alt="{{ product.name }}" loading="lazy">
+    {% endif %}
+    {% if product.discount %}<span class="product-badge">-{{ product.discount }}%</span>{% endif %}
+  </a>
+  <div class="product-meta">ART SOFFIO</div>
+  <a class="product-name" href="{{ product.get_absolute_url|default:'#' }}">{{ product.name }}</a>
+  <div class="price-row">
+    <span class="price">{{ product.price }} ₸</span>
+    {% if product.old_price %}<del>{{ product.old_price }} ₸</del>{% endif %}
+  </div>
+  <form action="/cart/add/{{ product.id }}/" method="post" class="product-form">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-cart">добавить</button>
+  </form>
+</article>

@@ -1,0 +1,42 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Каталог — ART SOFFIO{% endblock %}
+{% block content %}
+<section class="catalog-page container">
+  <div class="catalog-head">
+    <div>
+      <div class="eyebrow">ART SOFFIO</div>
+      <h1>Каталог товаров</h1>
+      <p>Косметика, уход и аксессуары.</p>
+    </div>
+    <form class="catalog-search" method="get">
+      <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Поиск по товарам">
+      <button class="btn btn-dark" type="submit">Найти</button>
+    </form>
+  </div>
+
+  <div class="catalog-layout">
+    <aside class="filters">
+      <div class="filter-title">Категории</div>
+      <a href="/catalog/" class="filter-link">Все товары</a>
+      {% for category in categories %}
+        <a href="?category={{ category.slug }}" class="filter-link">{{ category.name }}</a>
+      {% endfor %}
+      <div class="filter-divider"></div>
+      <a href="?sale=1" class="filter-link">Товары со скидкой</a>
+      <a href="?new=1" class="filter-link">Новинки</a>
+    </aside>
+
+    <div>
+      <div class="catalog-toolbar"><span>{{ products|length }} товаров</span><span>Сортировка: популярное</span></div>
+      <div class="product-grid product-grid--3">
+        {% for product in products %}
+          {% include 'store/partials/product_card.html' with product=product %}
+        {% empty %}
+          <div class="empty-state">Товаров пока нет.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
