@@ -11,7 +11,7 @@
     <p class="hero-desc">PDRN, PLLA и филлеры для профессиональных инъекционных процедур. Работаем напрямую с косметологами Бишкека — без посредников и подделок.</p>
     <div class="hero-actions">
       <a href="{% url 'store:catalog' %}" class="btn btn-gold">Смотреть каталог</a>
-      <a href="{% url 'store:about' %}" class="btn btn-outline">О враче</a>
+      <a href="{% url 'store:about' %}" class="btn btn-outline">О нас</a>
     </div>
   </div>
   <div class="hero-image-wrap">
@@ -76,10 +76,10 @@
     {% if about_image %}
       <img src="{{ about_image.url }}" alt="Dr. Isana">
     {% else %}
-      <img src="{% static 'store/img/about.jpg' %}" alt="Dr. Isana">
+      <img src="{% static 'store/img/about-preview.jpg' %}" alt="Dr. Isana">
     {% endif %}
     <div>
-      <div class="section-kicker">О враче</div>
+      <div class="section-kicker">О нас</div>
       <h2 class="about-preview-title">Dr. Isana</h2>
       <p class="about-preview-text">Косметолог из Бишкека, поставляет только оригинальные препараты для инъекционных процедур — PDRN, PLLA и филлеры. Автор обучающего контента для косметологов, помогает коллегам работать с проверенными материалами.</p>
       <a href="{% url 'store:about' %}" class="text-link">Подробнее →</a>
