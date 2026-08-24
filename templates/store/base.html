@@ -24,7 +24,7 @@
       <nav class="main-nav" aria-label="Главная навигация">
         <a href="{% url 'store:home' %}" class="nav-link {% if active_page == 'home' %}is-active{% endif %}">Главная</a>
         <a href="{% url 'store:catalog' %}" class="nav-link {% if active_page == 'catalog' %}is-active{% endif %}">Каталог</a>
-        <a href="{% url 'store:about' %}" class="nav-link {% if active_page == 'about' %}is-active{% endif %}">О враче</a>
+        <a href="{% url 'store:about' %}" class="nav-link {% if active_page == 'about' %}is-active{% endif %}">О нас</a>
         <a href="{% url 'store:reviews' %}" class="nav-link {% if active_page == 'reviews' %}is-active{% endif %}">Отзывы</a>
       </nav>
 
@@ -40,10 +40,26 @@
   <main>{% block content %}{% endblock %}</main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">Dr. Isana</div>
-      <div class="footer-contact">Beta Stores 1, Бишкек · +996 502 259 797</div>
+    <div class="footer-grid container">
+      <div>
+        <div class="footer-brand">Dr. Isana</div>
+        <p class="footer-tagline">Оригинальные препараты для косметологов — PDRN, PLLA, филлеры. Работаем напрямую, без посредников.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Навигация</div>
+        <a href="{% url 'store:home' %}">Главная</a>
+        <a href="{% url 'store:catalog' %}">Каталог</a>
+        <a href="{% url 'store:about' %}">О нас</a>
+        <a href="{% url 'store:reviews' %}">Отзывы</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Контакты</div>
+        <a href="https://wa.me/996502259797" target="_blank" rel="noopener">WhatsApp: +996 502 259 797</a>
+        <span>Beta Stores 1, Бишкек</span>
+        <a href="https://instagram.com/dr.isana" target="_blank" rel="noopener">@dr.isana</a>
+      </div>
     </div>
+    <div class="footer-bottom">© {% now "Y" %} Dr. Isana. Все права защищены.</div>
   </footer>
 
   <!-- Корзина (drawer) -->
