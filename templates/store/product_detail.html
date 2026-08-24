@@ -1,25 +1,31 @@
 {% extends 'store/base.html' %}
 {% load static %}
-{% block title %}{{ product.name }} — ART SOFFIO{% endblock %}
+{% block title %}{{ product.name }} — Dr. Isana{% endblock %}
 {% block content %}
 <section class="product-detail container">
   <div class="detail-image">
     {% if product.image %}
       <img src="{{ product.image.url }}" alt="{{ product.name }}">
     {% else %}
-      <img src="{% static 'store/img/prod1.jpg' %}" alt="{{ product.name }}">
+      <img src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}">
     {% endif %}
   </div>
   <div class="detail-info">
-    <div class="product-meta">ART SOFFIO</div>
-    <h1>{{ product.name }}</h1>
-    {% if product.description %}<p class="detail-description">{{ product.description }}</p>{% endif %}
-    <div class="detail-price">{{ product.price }} ₸ {% if product.old_price %}<del>{{ product.old_price }} ₸</del>{% endif %}</div>
-    <form action="/cart/add/{{ product.id }}/" method="post" class="detail-form">
-      {% csrf_token %}
-      <label>Количество <input type="number" name="quantity" value="1" min="1"></label>
-      <button class="btn btn-dark btn-large" type="submit">Добавить в корзину</button>
-    </form>
+    {% if product.get_category_display %}<div class="detail-cat">{{ product.get_category_display }}</div>{% endif %}
+    <h1 class="detail-title">{{ product.name }}</h1>
+    {% if product.description %}<p class="detail-desc">{{ product.description }}</p>{% endif %}
+    <div class="detail-price">
+      {{ product.price }} сом
+      {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
+    </div>
+    <button
+      type="button"
+      class="btn btn-gold"
+      data-add-to-cart
+      data-id="{{ product.id }}"
+      data-name="{{ product.name }}"
+      data-price="{{ product.price }}"
+    >Добавить в корзину</button>
   </div>
 </section>
 {% endblock %}

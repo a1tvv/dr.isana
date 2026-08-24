@@ -1,23 +1,31 @@
+{% load static %}
 <article class="product-card">
-  <a class="product-image" href="{{ product.get_absolute_url|default:'#' }}">
-    {% load static %}
-{% if product.image %}
-      <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
-    {% elif product.preview_image %}
-      <img src="{{ product.preview_image }}" alt="{{ product.name }}" loading="lazy">
+  <a href="{{ product.get_absolute_url|default:'#' }}">
+    {% if product.image %}
+      <img class="product-card-image" src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
     {% else %}
-      <img src="{% static 'store/img/prod1.jpg' %}" alt="{{ product.name }}" loading="lazy">
+      <img class="product-card-image" src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}" loading="lazy">
     {% endif %}
-    {% if product.discount %}<span class="product-badge">-{{ product.discount }}%</span>{% endif %}
   </a>
-  <div class="product-meta">ART SOFFIO</div>
-  <a class="product-name" href="{{ product.get_absolute_url|default:'#' }}">{{ product.name }}</a>
-  <div class="price-row">
-    <span class="price">{{ product.price }} ₸</span>
-    {% if product.old_price %}<del>{{ product.old_price }} ₸</del>{% endif %}
+  <div class="product-card-body">
+    {% if product.get_category_display %}
+      <div class="product-cat">{{ product.get_category_display }}</div>
+    {% endif %}
+    <a href="{{ product.get_absolute_url|default:'#' }}" class="product-name">{{ product.name }}</a>
+    {% if product.description %}<div class="product-desc">{{ product.description|truncatewords:14 }}</div>{% endif %}
+    <div class="product-price-row">
+      <span class="product-price">
+        {{ product.price }} сом
+        {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
+      </span>
+      <button
+        type="button"
+        class="btn-small-dark"
+        data-add-to-cart
+        data-id="{{ product.id }}"
+        data-name="{{ product.name }}"
+        data-price="{{ product.price }}"
+      >В корзину</button>
+    </div>
   </div>
-  <form action="/cart/add/{{ product.id }}/" method="post" class="product-form">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-cart">добавить</button>
-  </form>
 </article>

@@ -4,110 +4,78 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ART SOFFIO — магазин косметики и товаров для красоты.">
-  <title>{% block title %}ART SOFFIO — магазин косметики{% endblock %}</title>
+  <meta name="description" content="Dr. Isana — оригинальные препараты для косметологов: PDRN, PLLA, филлеры. Бишкек.">
+  <title>{% block title %}Dr. Isana — препараты для косметологов{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
   {% block extra_css %}{% endblock %}
 </head>
 <body>
-  <div class="site-shell">
-    <header class="site-header">
-      <div class="header-top container">
-        <div class="callback">
-          <a class="phone" href="tel:+77478455886">+7 (747) 845 58 86</a>
-          <button class="callback-link" type="button" data-open-callback>Заказать звонок</button>
-        </div>
 
-        <a href="/" class="brand" aria-label="ART SOFFIO">
-          <span class="brand-name">ART SOFFIO</span>
-          <span class="brand-subtitle">STUDIO DI MODA COSMETICA</span>
-        </a>
-
-        <div class="header-actions">
-          <button class="icon-btn" type="button" aria-label="Поиск" data-open-search>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-          </button>
-          <a class="icon-btn cart-btn" href="/cart/" aria-label="Корзина">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h2l2.4 10.1a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 1.9-1.4L21 9H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
-            {% if cart_count %}<span class="cart-count">{{ cart_count }}</span>{% endif %}
-          </a>
-        </div>
-      </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{% url 'store:home' %}" class="brand">
+        <span class="brand-name">Dr. Isana</span>
+        <span class="brand-subtitle">препараты для косметологов</span>
+      </a>
 
       <nav class="main-nav" aria-label="Главная навигация">
-        <div class="container nav-inner">
-          <a href="/" class="nav-link {% if active_page == 'home' %}is-active{% endif %}">ART SOFFIO</a>
-          <a href="/catalog/" class="nav-link {% if active_page == 'catalog' %}is-active{% endif %}">VOLLARÉ</a>
-          <a href="/catalog/?brand=sessio" class="nav-link">SESSIO</a>
-          <a href="/catalog/?brand=variete" class="nav-link">VARIÉTÉ</a>
-          <a href="/catalog/" class="nav-link">КАТАЛОГИ</a>
-          <a href="/catalog/?sale=1" class="nav-link">АКЦИИ</a>
-          <a href="#contacts" class="nav-link">КОНТАКТЫ</a>
-        </div>
+        <a href="{% url 'store:home' %}" class="nav-link {% if active_page == 'home' %}is-active{% endif %}">Главная</a>
+        <a href="{% url 'store:catalog' %}" class="nav-link {% if active_page == 'catalog' %}is-active{% endif %}">Каталог</a>
+        <a href="{% url 'store:about' %}" class="nav-link {% if active_page == 'about' %}is-active{% endif %}">О враче</a>
+        <a href="{% url 'store:reviews' %}" class="nav-link {% if active_page == 'reviews' %}is-active{% endif %}">Отзывы</a>
       </nav>
-    </header>
 
-    <main>{% block content %}{% endblock %}</main>
-
-    <footer class="site-footer" id="contacts">
-      <div class="container footer-grid">
-        <div>
-          <div class="footer-title">ART SOFFIO</div>
-          <p>Косметика, уход и аксессуары для красоты.</p>
-        </div>
-        <div>
-          <div class="footer-title">Каталог</div>
-          <a href="/catalog/">Макияж</a>
-          <a href="/catalog/">Уход за кожей</a>
-          <a href="/catalog/">Уход за волосами</a>
-          <a href="/catalog/">Аксессуары</a>
-        </div>
-        <div>
-          <div class="footer-title">Связаться с нами</div>
-          <a href="tel:+77478455886">+7 (747) 845 58 86</a>
-          <a href="mailto:admin@artsoffio.kz">admin@artsoffio.kz</a>
-        </div>
-        <div>
-          <div class="footer-title">Мы в социальных сетях</div>
-          <div class="socials">
-            <a href="#" aria-label="VK">VK</a>
-            <a href="#" aria-label="WhatsApp">WA</a>
-            <a href="#" aria-label="Instagram">IG</a>
-            <a href="#" aria-label="Facebook">FB</a>
-          </div>
-        </div>
+      <div class="header-actions">
+        <button class="cart-btn" type="button" aria-label="Корзина" data-open-cart>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle></svg>
+          <span class="cart-count is-hidden" data-cart-count>0</span>
+        </button>
       </div>
-      <div class="container footer-bottom">© {% now "Y" %} ART SOFFIO. Все права защищены.</div>
-    </footer>
-  </div>
-
-  <div class="modal" data-modal="search" aria-hidden="true">
-    <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-card modal-search">
-      <button class="modal-close" type="button" data-close-modal>×</button>
-      <h2>Поиск по каталогу</h2>
-      <form action="/catalog/" method="get">
-        <input type="search" name="q" placeholder="Например, помада" autofocus>
-        <button class="btn btn-dark" type="submit">Найти</button>
-      </form>
     </div>
-  </div>
+  </header>
 
-  <div class="modal" data-modal="callback" aria-hidden="true">
-    <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-card">
-      <button class="modal-close" type="button" data-close-modal>×</button>
-      <h2>Заказать звонок</h2>
-      <p>Оставьте номер — менеджер свяжется с вами.</p>
-      <form action="/callback/" method="post" class="callback-form">
-        {% csrf_token %}
-        <input name="name" type="text" placeholder="Ваше имя" required>
-        <input name="phone" type="tel" placeholder="Номер телефона" required>
-        <button class="btn btn-dark" type="submit">Отправить</button>
-      </form>
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Dr. Isana</div>
+      <div class="footer-contact">Beta Stores 1, Бишкек · +996 502 259 797</div>
+    </div>
+  </footer>
+
+  <!-- Корзина (drawer) -->
+  <div class="cart-overlay" data-cart-overlay data-close-cart></div>
+  <aside class="cart-drawer" data-cart-drawer>
+    <div class="cart-drawer-head">
+      <span class="cart-drawer-title">Корзина</span>
+      <button type="button" class="cart-drawer-close" data-close-cart>×</button>
+    </div>
+    <div class="cart-drawer-body" data-cart-body>
+      <div class="cart-empty">Корзина пуста</div>
+    </div>
+    <div class="cart-drawer-foot">
+      <div class="cart-total-row">
+        <span>Итого</span>
+        <span data-cart-total>0 сом</span>
+      </div>
+      <button type="button" class="btn btn-gold" style="width:100%;" data-open-checkout>Оформить заказ</button>
+    </div>
+  </aside>
+
+  <!-- Оформление заказа -->
+  <div class="checkout-overlay" data-checkout-overlay data-close-checkout>
+    <div class="checkout-modal" data-checkout-modal>
+      <div class="checkout-title">Оформление заказа</div>
+      <div class="checkout-sub">Заказ отправится менеджеру в WhatsApp</div>
+      <div class="checkout-fields">
+        <input type="text" placeholder="Ваше имя" data-checkout-name>
+        <input type="tel" placeholder="Номер телефона" data-checkout-phone>
+      </div>
+      <button type="button" class="btn btn-dark" data-submit-order>Отправить в WhatsApp</button>
+      <button type="button" class="checkout-cancel" data-close-checkout>Отмена</button>
     </div>
   </div>
 

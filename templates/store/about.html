@@ -1,0 +1,25 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}О враче — Dr. Isana{% endblock %}
+{% block content %}
+<section class="about-page">
+  <div class="section-kicker">О враче</div>
+  <h1 class="about-page-title">Dr. Isana</h1>
+  <div class="about-page-grid">
+    {% if about_image %}
+      <img src="{{ about_image.url }}" alt="Dr. Isana">
+    {% else %}
+      <img src="{% static 'store/img/about.jpg' %}" alt="Dr. Isana">
+    {% endif %}
+    <div class="about-page-text">
+      <p>Косметолог, работает в Бишкеке. Автор цифрового контента для косметологов — обучающие материалы, разборы препаратов и практические рекомендации.</p>
+      <p>Поставляет исключительно оригинальные препараты для инъекционных процедур: PDRN, PLLA и филлеры. Прямые поставки, без посредников — гарантия подлинности каждой позиции.</p>
+      <div class="about-contacts">
+        <div><strong>Адрес:</strong> Beta Stores 1, Бишкек, Кыргызстан</div>
+        <div><strong>WhatsApp:</strong> +996 502 259 797</div>
+        <div><strong>Instagram:</strong> <a href="https://instagram.com/dr.isana" target="_blank" rel="noopener">@dr.isana</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

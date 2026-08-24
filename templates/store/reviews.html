@@ -1,0 +1,55 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Отзывы — Dr. Isana{% endblock %}
+{% block content %}
+
+<section class="reviews-page container">
+  <div class="section-kicker">Отзывы</div>
+  <h1 class="reviews-page-title">Что говорят коллеги</h1>
+  <div class="reviews-page-grid">
+    {% for review in reviews %}
+      <div class="review-card-dashed">
+        <div class="review-text">{{ review.quote }}</div>
+        <div class="review-name">{{ review.name }}</div>
+      </div>
+    {% empty %}
+      <div class="review-card-dashed">
+        <div class="review-text">Добавьте текст отзыва клиента</div>
+        <div class="review-name">Косметолог, Бишкек</div>
+      </div>
+      <div class="review-card-dashed">
+        <div class="review-text">Добавьте текст отзыва клиента</div>
+        <div class="review-name">Косметолог, Бишкек</div>
+      </div>
+      <div class="review-card-dashed">
+        <div class="review-text">Добавьте текст отзыва клиента</div>
+        <div class="review-name">Косметолог, Ош</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="before-after-section container">
+  <div class="section-kicker">До / После</div>
+  <h2 class="before-after-title">Результаты процедур</h2>
+  <div class="before-after-grid">
+    {% for pair in before_after_pairs %}
+      <div class="before-after-card">
+        <div class="before-after-pair">
+          <div>
+            <img src="{{ pair.before.url }}" alt="До">
+            <span class="ba-tag before">До</span>
+          </div>
+          <div>
+            <img src="{{ pair.after.url }}" alt="После">
+            <span class="ba-tag after">После</span>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="empty-state">Фото до/после скоро появятся здесь.</div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
