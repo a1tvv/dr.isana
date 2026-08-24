@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # DEBUG=False на проде, True локально по умолчанию
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = False if os.environ.get('DEBUG') == 'False' else True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
 
