@@ -1,26 +1,30 @@
 {% load static %}
 <article class="product-card">
-  <a href="{{ product.get_absolute_url|default:'#' }}">
-    {% if product.image %}
-      <img class="product-card-image" src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
-    {% else %}
-      <img class="product-card-image" src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}" loading="lazy">
-    {% endif %}
-  </a>
-  <div class="product-card-body">
+  <div class="product-media">
+    <a href="{{ product.get_absolute_url|default:'#' }}">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+      {% else %}
+        <img src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}" loading="lazy">
+      {% endif %}
+    </a>
     {% if product.get_category_display %}
-      <div class="product-cat">{{ product.get_category_display }}</div>
+      <span class="product-tag">{{ product.get_category_display }}</span>
     {% endif %}
+    <span class="product-stock"><span class="stock-dot"></span>В наличии</span>
+  </div>
+  <div class="product-body">
+    <span class="product-badge">Оригинал</span>
     <a href="{{ product.get_absolute_url|default:'#' }}" class="product-name">{{ product.name }}</a>
-    {% if product.description %}<div class="product-desc">{{ product.description|truncatewords:14 }}</div>{% endif %}
-    <div class="product-price-row">
+    {% if product.description %}<div class="product-desc">{{ product.description|truncatewords:16 }}</div>{% endif %}
+    <div class="product-foot">
       <span class="product-price">
         {{ product.price }} сом
         {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
       </span>
       <button
         type="button"
-        class="btn-small-dark"
+        class="btn btn-pill"
         data-add-to-cart
         data-id="{{ product.id }}"
         data-name="{{ product.name }}"

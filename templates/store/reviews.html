@@ -3,25 +3,25 @@
 {% block title %}Отзывы — Dr. Isana{% endblock %}
 {% block content %}
 
-<section class="reviews-page container">
-  <div class="section-kicker">Отзывы</div>
-  <h1 class="reviews-page-title">Что говорят коллеги</h1>
-  <div class="reviews-page-grid">
+<section class="reviews-page">
+  <div class="kicker">Отзывы</div>
+  <h1 class="reviews-title">Что говорят коллеги</h1>
+  <div class="reviews-grid">
     {% for review in reviews %}
-      <div class="review-card-dashed">
+      <div class="review-card">
         <div class="review-text">{{ review.quote }}</div>
         <div class="review-name">{{ review.name }}</div>
       </div>
     {% empty %}
-      <div class="review-card-dashed">
+      <div class="review-card">
         <div class="review-text">Добавьте текст отзыва клиента</div>
         <div class="review-name">Косметолог, Бишкек</div>
       </div>
-      <div class="review-card-dashed">
+      <div class="review-card">
         <div class="review-text">Добавьте текст отзыва клиента</div>
         <div class="review-name">Косметолог, Бишкек</div>
       </div>
-      <div class="review-card-dashed">
+      <div class="review-card">
         <div class="review-text">Добавьте текст отзыва клиента</div>
         <div class="review-name">Косметолог, Ош</div>
       </div>
@@ -29,8 +29,8 @@
   </div>
 </section>
 
-<section class="before-after-section container">
-  <div class="section-kicker">До / После</div>
+<section class="before-after-section">
+  <div class="kicker">До / После</div>
   <h2 class="before-after-title">Результаты процедур</h2>
   <div class="before-after-grid">
     {% for pair in before_after_pairs %}

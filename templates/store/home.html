@@ -1,127 +1,93 @@
 {% extends 'store/base.html' %}
 {% load static %}
-{% block title %}Dr. Isana — оригинальные препараты для косметологов{% endblock %}
+{% block title %}Dr. Isana — оригинальные препараты для косметологов в Бишкеке{% endblock %}
 {% block content %}
 
 <section class="hero">
-  <span class="hero-watermark">Isana</span>
-  <div class="hero-copy">
-    <div class="eyebrow">Бишкек — Только оригинал</div>
-    <h1 class="hero-title">Оригинальные<br>препараты<br><em>для косметологов</em></h1>
-    <p class="hero-desc">PDRN, PLLA и филлеры для профессиональных инъекционных процедур. Работаем напрямую с косметологами Бишкека — без посредников и подделок.</p>
-    <div class="hero-actions">
-      <a href="{% url 'store:catalog' %}" class="btn btn-gold">Смотреть каталог</a>
-      <a href="{% url 'store:about' %}" class="btn btn-outline">О нас</a>
-    </div>
-  </div>
-  <div class="hero-image-wrap">
-    {% if hero_image %}
-      <img src="{{ hero_image.url }}" alt="Dr. Isana">
-    {% else %}
-      <img src="{% static 'store/img/hero.png' %}" alt="Dr. Isana">
-    {% endif %}
-    <div class="hero-image-frame"></div>
-  </div>
-</section>
-
-<section class="trust-strip">
-  <div class="trust-grid container">
-    <div class="trust-item">
-      <div class="trust-title">100%</div>
-      <div class="trust-sub">Только оригинальные препараты</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-title">Напрямую</div>
-      <div class="trust-sub">Без посредников и переплат</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-title">Бишкек</div>
-      <div class="trust-sub">Доставка и самовывоз</div>
-    </div>
-  </div>
-</section>
-
-<section class="section container">
-  <div class="section-head">
-    <span class="section-num">01</span>
-    <div>
-      <div class="section-kicker">Каталог</div>
-      <h2 class="section-title">Категории препаратов</h2>
-    </div>
-  </div>
-  <div class="category-grid">
-    <a href="{% url 'store:catalog' %}?category=pdrn" class="category-card">
-      <span class="category-num">01</span>
-      <div class="category-title">PDRN</div>
-      <div class="category-desc">Полинуклеотиды для редермализации и биоревитализации</div>
-      <span class="category-link">Смотреть →</span>
-    </a>
-    <a href="{% url 'store:catalog' %}?category=plla" class="category-card">
-      <span class="category-num">02</span>
-      <div class="category-title">PLLA</div>
-      <div class="category-desc">Биостимуляторы коллагена для контура лица</div>
-      <span class="category-link">Смотреть →</span>
-    </a>
-    <a href="{% url 'store:catalog' %}?category=filler" class="category-card">
-      <span class="category-num">03</span>
-      <div class="category-title">Филлеры</div>
-      <div class="category-desc">Гиалуроновая кислота разной плотности</div>
-      <span class="category-link">Смотреть →</span>
-    </a>
-  </div>
-</section>
-
-<section class="about-preview">
-  <div class="about-preview-grid container">
-    {% if about_image %}
-      <img src="{{ about_image.url }}" alt="Dr. Isana">
-    {% else %}
-      <img src="{% static 'store/img/about-preview.jpg' %}" alt="Dr. Isana">
-    {% endif %}
-    <div>
-      <div class="section-kicker">О нас</div>
-      <h2 class="about-preview-title">Dr. Isana</h2>
-      <p class="about-preview-text">Косметолог из Бишкека, поставляет только оригинальные препараты для инъекционных процедур — PDRN, PLLA и филлеры. Автор обучающего контента для косметологов, помогает коллегам работать с проверенными материалами.</p>
-      <a href="{% url 'store:about' %}" class="text-link">Подробнее →</a>
-    </div>
-  </div>
-</section>
-
-<section class="section container">
-  <div class="section-head">
-    <span class="section-num">02</span>
-    <div>
-      <div class="section-kicker">Отзывы</div>
-      <h2 class="section-title">Что говорят коллеги</h2>
-    </div>
-  </div>
-  <div class="reviews-grid">
-    {% for review in reviews_preview %}
-      <div class="review-card">
-        <div class="review-quote-mark">"</div>
-        <div class="review-text">{{ review.quote }}</div>
-        <div class="review-name">{{ review.name }}</div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="kicker"><span class="kicker-dot"></span>Только оригинальные препараты</div>
+      <h1 class="hero-title">Препараты для косметологов, которым можно доверять</h1>
+      <p class="hero-sub">PDRN, PLLA и филлеры напрямую от поставщика. Без посредников, без подделок. Доставка по Бишкеку.</p>
+      <div class="hero-actions">
+        <a href="{% url 'store:catalog' %}" class="btn btn-blue">Смотреть каталог</a>
+        <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn-link-underline">Написать менеджеру</a>
       </div>
+    </div>
+    <div class="hero-media-row">
+      {% if hero_image %}
+        <img src="{{ hero_image.url }}" alt="Dr. Isana">
+      {% else %}
+        <img src="{% static 'store/img/hero.png' %}" alt="Dr. Isana">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="catalog-toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      <input type="search" placeholder="Поиск: PDRN, PLLA, филлеры..." data-product-search>
+    </div>
+    <a href="{% url 'store:catalog' %}" class="catalog-tab is-active">Все</a>
+    <a href="{% url 'store:catalog' %}?category=pdrn" class="catalog-tab">PDRN</a>
+    <a href="{% url 'store:catalog' %}?category=plla" class="catalog-tab">PLLA</a>
+    <a href="{% url 'store:catalog' %}?category=filler" class="catalog-tab">Филлеры</a>
+  </div>
+
+  <div class="product-grid" data-product-grid>
+    {% for product in bestsellers %}
+      {% include 'store/partials/product_card.html' with product=product %}
     {% empty %}
-      <div class="review-card">
-        <div class="review-quote-mark">"</div>
-        <div class="review-text">Добавьте текст отзыва клиента</div>
-        <div class="review-name">Косметолог, Бишкек</div>
-      </div>
-      <div class="review-card">
-        <div class="review-quote-mark">"</div>
-        <div class="review-text">Добавьте текст отзыва клиента</div>
-        <div class="review-name">Косметолог, Бишкек</div>
-      </div>
-      <div class="review-card">
-        <div class="review-quote-mark">"</div>
-        <div class="review-text">Добавьте текст отзыва клиента</div>
-        <div class="review-name">Косметолог, Ош</div>
-      </div>
+      <div class="empty-state">Товары скоро появятся.</div>
     {% endfor %}
   </div>
-  <div style="margin-top:48px;">
-    <a href="{% url 'store:reviews' %}" class="text-link">Все отзывы и фото до/после →</a>
+
+  <div class="section-more">
+    <a href="{% url 'store:catalog' %}">Весь каталог</a>
+  </div>
+</section>
+
+<section class="doctor-section">
+  <div class="doctor-card">
+    <div class="doctor-avatar">
+      {% if about_image %}<img src="{{ about_image.url }}" alt="Dr. Isana">{% else %}DI{% endif %}
+    </div>
+    <div>
+      <div class="doctor-name">Dr. Isana</div>
+      <div class="doctor-role">Косметолог · Бишкек</div>
+      <p class="doctor-text">Поставляет оригинальные PDRN, PLLA и филлеры напрямую от производителя. Проконсультируйтесь напрямую: подберём препарат и оформим заказ.</p>
+      <div class="doctor-actions">
+        <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn btn-navy-inline">Написать в WhatsApp</a>
+        <a href="{% url 'store:about' %}" class="btn btn-outline-navy">Подробнее о враче</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="section-center" style="margin-bottom:40px;">
+    <div class="kicker" style="justify-content:center;">Перед заявкой</div>
+    <h2 class="section-title">Частые вопросы</h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>Как быстро доставляете?</summary>
+      <div class="faq-answer">Доставка по Бишкеку в течение дня. Точные сроки уточнит менеджер после оформления заказа.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Как оплатить заказ?</summary>
+      <div class="faq-answer">Оплата обсуждается с менеджером в WhatsApp после подтверждения заказа.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Это точно оригинальные препараты?</summary>
+      <div class="faq-answer">Да, мы работаем напрямую с поставщиками, без посредников — это гарантия подлинности.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Можно проконсультироваться перед заказом?</summary>
+      <div class="faq-answer">Да, напишите менеджеру в WhatsApp — поможем подобрать препарат под вашу задачу.</div>
+    </details>
   </div>
 </section>
 

@@ -1,23 +1,27 @@
 {% extends 'store/base.html' %}
 {% load static %}
-{% block title %}Каталог — Dr. Isana{% endblock %}
+{% block title %}Каталог препаратов — Dr. Isana{% endblock %}
 {% block content %}
-<section class="section container" style="padding-top:64px;">
+<section class="section" style="padding-top:56px;">
 
-  <div class="catalog-header">
-    <div class="section-kicker">Каталог</div>
+  <div class="catalog-head">
+    <div class="kicker">Каталог</div>
     <h1 class="catalog-title">Препараты для процедур</h1>
-    <p class="catalog-note">Ассортимент и цены ориентировочные — актуальные позиции уточняйте у менеджера при оформлении заказа.</p>
+    <p class="catalog-note">Ассортимент и цены ориентировочные — уточняйте у менеджера при оформлении.</p>
   </div>
 
-  <div class="catalog-tabs">
+  <div class="catalog-toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      <input type="search" placeholder="Поиск: PDRN, PLLA, филлеры..." data-product-search>
+    </div>
     <a href="{% url 'store:catalog' %}" class="catalog-tab {% if not request.GET.category %}is-active{% endif %}">Все</a>
     <a href="?category=pdrn" class="catalog-tab {% if request.GET.category == 'pdrn' %}is-active{% endif %}">PDRN</a>
     <a href="?category=plla" class="catalog-tab {% if request.GET.category == 'plla' %}is-active{% endif %}">PLLA</a>
     <a href="?category=filler" class="catalog-tab {% if request.GET.category == 'filler' %}is-active{% endif %}">Филлеры</a>
   </div>
 
-  <div class="product-grid">
+  <div class="product-grid" data-product-grid>
     {% for product in products %}
       {% include 'store/partials/product_card.html' with product=product %}
     {% empty %}

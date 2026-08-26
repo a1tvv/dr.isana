@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{ product.name }} — Dr. Isana{% endblock %}
 {% block content %}
-<section class="product-detail container">
+<section class="product-detail">
   <div class="detail-image">
     {% if product.image %}
       <img src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -10,8 +10,8 @@
       <img src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}">
     {% endif %}
   </div>
-  <div class="detail-info">
-    {% if product.get_category_display %}<div class="detail-cat">{{ product.get_category_display }}</div>{% endif %}
+  <div>
+    {% if product.get_category_display %}<div class="kicker">{{ product.get_category_display }}</div>{% endif %}
     <h1 class="detail-title">{{ product.name }}</h1>
     {% if product.description %}<p class="detail-desc">{{ product.description }}</p>{% endif %}
     <div class="detail-price">
@@ -20,7 +20,7 @@
     </div>
     <button
       type="button"
-      class="btn btn-gold"
+      class="btn btn-blue"
       data-add-to-cart
       data-id="{{ product.id }}"
       data-name="{{ product.name }}"

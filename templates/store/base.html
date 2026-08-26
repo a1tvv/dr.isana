@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Dr. Isana — оригинальные препараты для косметологов: PDRN, PLLA, филлеры. Бишкек.">
+  <meta name="description" content="Dr. Isana — оригинальные препараты для косметологов: PDRN, PLLA, филлеры. Бишкек, доставка день в день.">
   <title>{% block title %}Dr. Isana — препараты для косметологов{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
   {% block extra_css %}{% endblock %}
 </head>
@@ -18,21 +18,21 @@
     <div class="header-inner">
       <a href="{% url 'store:home' %}" class="brand">
         <span class="brand-name">Dr. Isana</span>
-        <span class="brand-subtitle">препараты для косметологов</span>
       </a>
 
       <nav class="main-nav" aria-label="Главная навигация">
         <a href="{% url 'store:home' %}" class="nav-link {% if active_page == 'home' %}is-active{% endif %}">Главная</a>
         <a href="{% url 'store:catalog' %}" class="nav-link {% if active_page == 'catalog' %}is-active{% endif %}">Каталог</a>
-        <a href="{% url 'store:about' %}" class="nav-link {% if active_page == 'about' %}is-active{% endif %}">О нас</a>
+        <a href="{% url 'store:about' %}" class="nav-link {% if active_page == 'about' %}is-active{% endif %}">О враче</a>
         <a href="{% url 'store:reviews' %}" class="nav-link {% if active_page == 'reviews' %}is-active{% endif %}">Отзывы</a>
       </nav>
 
       <div class="header-actions">
         <button class="cart-btn" type="button" aria-label="Корзина" data-open-cart>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
           <span class="cart-count is-hidden" data-cart-count>0</span>
         </button>
+        <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="header-whatsapp">WhatsApp</a>
       </div>
     </div>
   </header>
@@ -40,42 +40,44 @@
   <main>{% block content %}{% endblock %}</main>
 
   <footer class="site-footer">
-    <div class="footer-split">
-      <div class="footer-logo-col">
-        <a href="{% url 'store:home' %}" class="footer-logo footer-logo-desktop">Dr.Isana</a>
-        <a href="{% url 'store:home' %}" class="footer-logo footer-logo-mobile">Dr. Isana</a>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Dr. Isana</div>
+        <p class="footer-tagline">Оригинальные препараты для косметологов — PDRN, PLLA, филлеры. Доставка по Бишкеку.</p>
       </div>
-      <div class="footer-info-col">
-        <nav class="footer-nav" aria-label="Футер — навигация">
-          <a href="{% url 'store:home' %}">Главная</a>
-          <a href="{% url 'store:catalog' %}">Каталог</a>
-          <a href="{% url 'store:about' %}">О нас</a>
-          <a href="{% url 'store:reviews' %}">Отзывы</a>
-        </nav>
-
-        <div class="footer-divider"></div>
-
-        <div class="footer-contacts-mobile">
-          <a href="https://wa.me/996502259797" target="_blank" rel="noopener">WhatsApp +996 502 259 797</a>
-          <span>Beta Stores 1, Бишкек</span>
-          <a href="https://instagram.com/dr.isana" target="_blank" rel="noopener">@dr.isana</a>
-        </div>
-
-        <div class="footer-contacts-desktop">
-          <a href="https://wa.me/996502259797" target="_blank" rel="noopener">+996 502 259 797</a>
-          <span class="footer-dot">·</span>
-          <a href="https://instagram.com/dr.isana" target="_blank" rel="noopener">@dr.isana</a>
-        </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Каталог</span>
+        <a href="{% url 'store:catalog' %}">Весь каталог</a>
+        <a href="{% url 'store:catalog' %}?category=pdrn">PDRN</a>
+        <a href="{% url 'store:catalog' %}?category=plla">PLLA</a>
+        <a href="{% url 'store:catalog' %}?category=filler">Филлеры</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Информация</span>
+        <a href="{% url 'store:about' %}">О враче</a>
+        <a href="{% url 'store:reviews' %}">Отзывы</a>
+        <a href="{% url 'store:home' %}">Главная</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Контакты</span>
+        <span>Beta Stores 1, Бишкек</span>
+        <a href="https://wa.me/996502259797" target="_blank" rel="noopener">+996 502 259 797</a>
+        <a href="https://instagram.com/dr.isana" target="_blank" rel="noopener">@dr.isana</a>
       </div>
     </div>
+    <div class="footer-bottom">© {% now "Y" %} Dr. Isana. Все права защищены.</div>
   </footer>
 
-  <!-- Корзина (drawer) -->
+  <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="wa-float" aria-label="Написать в WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </a>
+
+  <!-- Корзина -->
   <div class="cart-overlay" data-cart-overlay data-close-cart></div>
   <aside class="cart-drawer" data-cart-drawer>
     <div class="cart-drawer-head">
       <span class="cart-drawer-title">Корзина</span>
-      <button type="button" class="cart-drawer-close" data-close-cart>×</button>
+      <button type="button" class="cart-drawer-close" data-close-cart>&times;</button>
     </div>
     <div class="cart-drawer-body" data-cart-body>
       <div class="cart-empty">Корзина пуста</div>
@@ -85,7 +87,7 @@
         <span>Итого</span>
         <span data-cart-total>0 сом</span>
       </div>
-      <button type="button" class="btn btn-gold" style="width:100%;" data-open-checkout>Оформить заказ</button>
+      <button type="button" class="btn btn-navy" data-open-checkout>Оформить заказ</button>
     </div>
   </aside>
 
@@ -98,12 +100,12 @@
         <input type="text" placeholder="Ваше имя" data-checkout-name>
         <input type="tel" placeholder="Номер телефона" data-checkout-phone>
       </div>
-      <button type="button" class="btn btn-dark" data-submit-order>Отправить в WhatsApp</button>
+      <button type="button" class="btn btn-navy" data-submit-order>Отправить в WhatsApp</button>
       <button type="button" class="checkout-cancel" data-close-checkout>Отмена</button>
     </div>
   </div>
 
-  <script src="{% static 'store/js/store.js' %}"></script>
+  <script src="{% static 'store/js/store.js' %}" charset="utf-8"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

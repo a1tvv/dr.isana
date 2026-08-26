@@ -1,15 +1,14 @@
 (function () {
   'use strict';
 
-  var WHATSAPP_NUMBER = '996502259797'; // TODO: заменить на актуальный номер клиента
+  var WHATSAPP_NUMBER = '996502259797';
   var CART_KEY = 'dr_isana_cart';
 
+  /* ================= Корзина ================= */
+
   function getCart() {
-    try {
-      return JSON.parse(localStorage.getItem(CART_KEY)) || {};
-    } catch (e) {
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; }
+    catch (e) { return {}; }
   }
 
   function saveCart(cart) {
@@ -17,66 +16,56 @@
     renderCart();
   }
 
-  function fmt(n) {
-    return Number(n).toLocaleString('ru-RU') + ' сом';
+  function fmt(n) { return Number(n).toLocaleString('ru-RU') + ' сом'; }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
   }
 
   function addToCart(id, name, price) {
     var cart = getCart();
-    if (cart[id]) {
-      cart[id].qty += 1;
-    } else {
-      cart[id] = { id: id, name: name, price: Number(price), qty: 1 };
-    }
+    if (cart[id]) cart[id].qty += 1;
+    else cart[id] = { id: id, name: name, price: Number(price), qty: 1 };
     saveCart(cart);
     openCart();
   }
 
-  function incQty(id) {
-    var cart = getCart();
-    if (cart[id]) { cart[id].qty += 1; saveCart(cart); }
-  }
+  function incQty(id) { var c = getCart(); if (c[id]) { c[id].qty += 1; saveCart(c); } }
 
   function decQty(id) {
-    var cart = getCart();
-    if (cart[id]) {
-      cart[id].qty -= 1;
-      if (cart[id].qty <= 0) delete cart[id];
-      saveCart(cart);
-    }
+    var c = getCart();
+    if (c[id]) { c[id].qty -= 1; if (c[id].qty <= 0) delete c[id]; saveCart(c); }
   }
 
-  function removeItem(id) {
-    var cart = getCart();
-    delete cart[id];
-    saveCart(cart);
-  }
+  function removeItem(id) { var c = getCart(); delete c[id]; saveCart(c); }
 
   function cartTotal(cart) {
-    var total = 0;
-    Object.keys(cart).forEach(function (id) { total += cart[id].price * cart[id].qty; });
-    return total;
+    var t = 0;
+    Object.keys(cart).forEach(function (id) { t += cart[id].price * cart[id].qty; });
+    return t;
   }
 
   function cartCount(cart) {
-    var count = 0;
-    Object.keys(cart).forEach(function (id) { count += cart[id].qty; });
-    return count;
+    var n = 0;
+    Object.keys(cart).forEach(function (id) { n += cart[id].qty; });
+    return n;
   }
 
   function renderCart() {
     var cart = getCart();
     var body = document.querySelector('[data-cart-body]');
-    var countBadge = document.querySelector('[data-cart-count]');
-    var totalLabel = document.querySelector('[data-cart-total]');
+    var badge = document.querySelector('[data-cart-count]');
+    var totalEl = document.querySelector('[data-cart-total]');
     if (!body) return;
 
     var count = cartCount(cart);
-    if (countBadge) {
-      countBadge.textContent = count;
-      countBadge.classList.toggle('is-hidden', count === 0);
+    if (badge) {
+      badge.textContent = count;
+      badge.classList.toggle('is-hidden', count === 0);
     }
-    if (totalLabel) totalLabel.textContent = fmt(cartTotal(cart));
+    if (totalEl) totalEl.textContent = fmt(cartTotal(cart));
 
     var ids = Object.keys(cart);
     if (ids.length === 0) {
@@ -85,55 +74,46 @@
     }
 
     body.innerHTML = ids.map(function (id) {
-      var item = cart[id];
-      var lineTotal = item.price * item.qty;
-      return (
-        '<div class="cart-line">' +
-          '<div class="cart-line-info">' +
-            '<div class="cart-line-name">' + escapeHtml(item.name) + '</div>' +
-            '<div class="cart-line-price">' + fmt(item.price) + ' × ' + item.qty + '</div>' +
-            '<div class="cart-line-controls">' +
-              '<button type="button" class="qty-btn" data-dec="' + id + '">\u2212</button>' +
-              '<span>' + item.qty + '</span>' +
-              '<button type="button" class="qty-btn" data-inc="' + id + '">+</button>' +
-              '<button type="button" class="cart-line-remove" data-remove="' + id + '">Удалить</button>' +
-            '</div>' +
+      var it = cart[id];
+      return '<div class="cart-line">' +
+        '<div class="cart-line-info">' +
+          '<div class="cart-line-name">' + escapeHtml(it.name) + '</div>' +
+          '<div class="cart-line-price">' + fmt(it.price) + ' × ' + it.qty + '</div>' +
+          '<div class="cart-line-controls">' +
+            '<button type="button" class="qty-btn" data-dec="' + id + '">\u2212</button>' +
+            '<span>' + it.qty + '</span>' +
+            '<button type="button" class="qty-btn" data-inc="' + id + '">+</button>' +
+            '<button type="button" class="cart-line-remove" data-remove="' + id + '">Удалить</button>' +
           '</div>' +
-          '<div class="cart-line-total">' + fmt(lineTotal) + '</div>' +
-        '</div>'
-      );
+        '</div>' +
+        '<div class="cart-line-total">' + fmt(it.price * it.qty) + '</div>' +
+      '</div>';
     }).join('');
   }
 
-  function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
   function openCart() {
-    var overlay = document.querySelector('[data-cart-overlay]');
-    var drawer = document.querySelector('[data-cart-drawer]');
-    if (overlay) overlay.classList.add('is-open');
-    if (drawer) drawer.classList.add('is-open');
+    var o = document.querySelector('[data-cart-overlay]');
+    var d = document.querySelector('[data-cart-drawer]');
+    if (o) o.classList.add('is-open');
+    if (d) d.classList.add('is-open');
   }
 
   function closeCart() {
-    var overlay = document.querySelector('[data-cart-overlay]');
-    var drawer = document.querySelector('[data-cart-drawer]');
-    if (overlay) overlay.classList.remove('is-open');
-    if (drawer) drawer.classList.remove('is-open');
+    var o = document.querySelector('[data-cart-overlay]');
+    var d = document.querySelector('[data-cart-drawer]');
+    if (o) o.classList.remove('is-open');
+    if (d) d.classList.remove('is-open');
   }
 
   function openCheckout() {
     closeCart();
-    var overlay = document.querySelector('[data-checkout-overlay]');
-    if (overlay) overlay.classList.add('is-open');
+    var o = document.querySelector('[data-checkout-overlay]');
+    if (o) o.classList.add('is-open');
   }
 
   function closeCheckout() {
-    var overlay = document.querySelector('[data-checkout-overlay]');
-    if (overlay) overlay.classList.remove('is-open');
+    var o = document.querySelector('[data-checkout-overlay]');
+    if (o) o.classList.remove('is-open');
   }
 
   function submitOrder() {
@@ -141,14 +121,14 @@
     var ids = Object.keys(cart);
     if (ids.length === 0) return;
 
-    var nameInput = document.querySelector('[data-checkout-name]');
-    var phoneInput = document.querySelector('[data-checkout-phone]');
-    var name = nameInput ? nameInput.value.trim() : '';
-    var phone = phoneInput ? phoneInput.value.trim() : '';
+    var nameEl = document.querySelector('[data-checkout-name]');
+    var phoneEl = document.querySelector('[data-checkout-phone]');
+    var name = nameEl ? nameEl.value.trim() : '';
+    var phone = phoneEl ? phoneEl.value.trim() : '';
 
     var lines = ids.map(function (id) {
-      var item = cart[id];
-      return '• ' + item.name + ' × ' + item.qty + ' — ' + fmt(item.price * item.qty);
+      var it = cart[id];
+      return '• ' + it.name + ' × ' + it.qty + ' — ' + fmt(it.price * it.qty);
     });
 
     var text = 'Здравствуйте! Хочу оформить заказ:\n' + lines.join('\n') +
@@ -161,12 +141,51 @@
     localStorage.removeItem(CART_KEY);
     renderCart();
     closeCheckout();
-    if (nameInput) nameInput.value = '';
-    if (phoneInput) phoneInput.value = '';
+    if (nameEl) nameEl.value = '';
+    if (phoneEl) phoneEl.value = '';
   }
+
+  /* ================= Поиск по товарам ================= */
+
+  function initSearch() {
+    var input = document.querySelector('[data-product-search]');
+    var grid = document.querySelector('[data-product-grid]');
+    if (!input || !grid) return;
+
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      var cards = grid.querySelectorAll('.product-card');
+      var visible = 0;
+
+      for (var i = 0; i < cards.length; i++) {
+        var nameEl = cards[i].querySelector('.product-name');
+        var descEl = cards[i].querySelector('.product-desc');
+        var hay = ((nameEl ? nameEl.textContent : '') + ' ' + (descEl ? descEl.textContent : '')).toLowerCase();
+        var match = !q || hay.indexOf(q) !== -1;
+        cards[i].style.display = match ? '' : 'none';
+        if (match) visible++;
+      }
+
+      var noRes = grid.querySelector('[data-no-results]');
+      if (visible === 0 && q) {
+        if (!noRes) {
+          noRes = document.createElement('div');
+          noRes.className = 'empty-state';
+          noRes.setAttribute('data-no-results', '');
+          noRes.textContent = 'Ничего не найдено. Попробуйте изменить запрос.';
+          grid.appendChild(noRes);
+        }
+      } else if (noRes) {
+        noRes.remove();
+      }
+    });
+  }
+
+  /* ================= Init ================= */
 
   document.addEventListener('DOMContentLoaded', function () {
     renderCart();
+    initSearch();
 
     document.addEventListener('click', function (e) {
       var addBtn = e.target.closest('[data-add-to-cart]');
@@ -189,10 +208,7 @@
       if (rm) { removeItem(rm.dataset.remove); return; }
     });
 
-    // Не закрывать модалку чекаута при клике внутри неё
-    var checkoutModal = document.querySelector('[data-checkout-modal]');
-    if (checkoutModal) {
-      checkoutModal.addEventListener('click', function (e) { e.stopPropagation(); });
-    }
+    var modal = document.querySelector('[data-checkout-modal]');
+    if (modal) modal.addEventListener('click', function (e) { e.stopPropagation(); });
   });
 })();
