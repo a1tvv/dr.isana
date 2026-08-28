@@ -1,0 +1,81 @@
+/* ===== Dr. Isana — admin panel polish ===== */
+
+:root {
+  --admin-navy: #0A1F44;
+  --admin-blue: #5BA6FF;
+}
+
+#header {
+  background: var(--admin-navy);
+}
+#branding h1 a {
+  color: #FFFFFF;
+}
+
+.module h2, .module caption, .inline-group h2 {
+  background: var(--admin-navy);
+}
+
+a:link, a:visited {
+  color: var(--admin-navy);
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  background: var(--admin-navy);
+  border-radius: 8px;
+}
+.button:hover, input[type=submit]:hover, .submit-row input:hover {
+  background: var(--admin-blue);
+}
+
+.button.default, input[type=submit].default {
+  background: var(--admin-blue);
+}
+
+/* Крупнее поле цены в списке — легче попасть пальцем / кликом */
+#result_list input[type=number] {
+  padding: 6px 8px;
+  font-size: 14px;
+}
+
+/* Строки таблицы товаров повыше — легче читать на глаз */
+#result_list td, #result_list th {
+  padding: 10px 8px;
+}
+
+.fieldBox, .form-row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* ===== Дашборд («Администрирование сайта») ===== */
+.module {
+  border: 1px solid #E6ECF5;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.module h2, .module caption {
+  border-radius: 0;
+  font-weight: 600;
+}
+#content h1 {
+  color: var(--admin-navy);
+}
+
+/* ===== Страница входа ===== */
+body.login {
+  background: #F5F8FD;
+}
+.login #container {
+  border: 1px solid #E6ECF5;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(10,31,68,0.08);
+}
+.login .form-row label {
+  color: var(--admin-navy);
+  font-weight: 600;
+}
+.login .submit-row {
+  text-align: center;
+}

@@ -3,3 +3,5 @@ psycopg2-binary
 whitenoise
 dj-database-url
 Pillow
+django-storages
+boto3

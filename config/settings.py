@@ -9,19 +9,15 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
     'SECRET_KEY',
     'django-insecure-uf_r6kkz2mt**xvzk3bmpp6owm06dmten^u(dma=zjtndpvz=g'
 )
 
-# DEBUG=False на проде, True локально по умолчанию
 DEBUG = False if os.environ.get('DEBUG') == 'False' else True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -65,8 +61,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-# Локально — SQLite (если DATABASE_URL не задан), на Render — Postgres из env
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
@@ -74,8 +68,6 @@ DATABASES = {
     )
 }
 
-
-# Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -85,32 +77,41 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-
 LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'Asia/Bishkek'
 USE_I18N = True
 USE_TZ = True
 
 
-
-
-
-# Static files (CSS, JavaScript, Images)
-
+# Static files (CSS, JS)
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # сюда collectstatic сложит файлы на Render
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
-# Media files (фото товаров) — пока локально, см. примечание ниже
-MEDIA_URL = 'uploads/'
-MEDIA_ROOT = BASE_DIR / 'uploads'
+# Хранилище — DO Spaces на проде (если заданы переменные), локально — обычный диск
+if os.environ.get('USE_SPACES') == 'True':
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+    AWS_ACCESS_KEY_ID = os.environ.get('DO_SPACES_KEY')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('DO_SPACES_SECRET')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('DO_SPACES_BUCKET')
+    AWS_S3_ENDPOINT_URL = os.environ.get('DO_SPACES_ENDPOINT')
+    AWS_S3_ADDRESSING_STYLE = 'path'
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_QUERYSTRING_AUTH = False
+else:
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    }
+    MEDIA_URL = 'uploads/'
+    MEDIA_ROOT = BASE_DIR / 'uploads'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
