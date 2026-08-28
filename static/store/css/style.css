@@ -134,8 +134,12 @@ details > summary::-webkit-details-marker { display: none; }
 .product-price del { font-size: 13px; color: var(--text-faint); font-weight: 400; margin-left: 6px; }
 .add-btn {
   width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #FFFFFF; border: none;
-  font-size: 18px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
+.add-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.add-btn:hover { background: var(--blue); }
+.add-btn:active { transform: scale(0.92); }
 .empty-state { font-size: 14px; color: var(--text-faint); padding: 60px 0; text-align: center; grid-column: 1 / -1; }
 .section-more { text-align: center; margin-top: 40px; }
 .section-more a { font-size: 13px; font-weight: 700; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
