@@ -134,14 +134,27 @@ details > summary::-webkit-details-marker { display: none; }
 .product-price del { font-size: 13px; color: var(--text-faint); font-weight: 400; margin-left: 6px; }
 .product-price-row { margin-bottom: 14px; }
 .add-btn-pill {
-  width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
-  background: var(--navy); color: #FFFFFF; border: none; border-radius: 999px;
-  padding: 12px 20px; font-size: 14px; font-weight: 700; cursor: pointer;
-  transition: background 0.15s ease, transform 0.1s ease;
+  width: 100%; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: linear-gradient(180deg, #6EB4FF 0%, #3D82E8 100%);
+  color: #FFFFFF; border: none; border-radius: 999px;
+  padding: 6px 6px 6px 22px; font-size: 14px; font-weight: 800; letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(61,130,232,0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
 }
-.add-btn-pill svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
-.add-btn-pill:hover { background: var(--blue); }
-.add-btn-pill:active { transform: scale(0.98); }
+.add-btn-pill::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+  border-radius: 999px 999px 0 0; pointer-events: none;
+}
+.add-btn-pill .cart-icon-wrap {
+  width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative;
+}
+.add-btn-pill svg { width: 18px; height: 18px; fill: none; stroke: #FFFFFF; stroke-width: 2; position: relative; }
+.add-btn-pill:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(61,130,232,0.45), inset 0 1px 0 rgba(255,255,255,0.4); }
+.add-btn-pill:active { transform: translateY(0) scale(0.98); }
 .add-btn {
   width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #FFFFFF; border: none;
   cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
