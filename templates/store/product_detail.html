@@ -1,31 +1,37 @@
-{% extends 'store/base.html' %}
 {% load static %}
-{% block title %}{{ product.name }} — Dr. Isana{% endblock %}
-{% block content %}
-<section class="product-detail">
-  <div class="detail-image">
-    {% if product.image %}
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">
-    {% else %}
-      <img src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}">
+<article class="product-card">
+  <div class="product-media">
+    <a href="{{ product.get_absolute_url|default:'#' }}">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+      {% else %}
+        <img src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}" loading="lazy">
+      {% endif %}
+    </a>
+    {% if product.get_category_display %}
+      <span class="product-tag">{{ product.get_category_display }}</span>
     {% endif %}
+    <span class="product-stock"><span class="stock-dot"></span>В наличии</span>
   </div>
-  <div>
-    {% if product.get_category_display %}<div class="kicker">{{ product.get_category_display }}</div>{% endif %}
-    <h1 class="detail-title">{{ product.name }}</h1>
-    {% if product.description %}<p class="detail-desc">{{ product.description }}</p>{% endif %}
-    <div class="detail-price">
-      {{ product.price }} сом
-      {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
+  <div class="product-body">
+    <a href="{{ product.get_absolute_url|default:'#' }}" class="product-name">{{ product.name }}</a>
+    {% if product.description %}<div class="product-desc">{{ product.description|truncatewords:16 }}</div>{% endif %}
+    <div class="product-foot">
+      <span class="product-price">
+        {{ product.price }} сом
+        {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
+      </span>
+      <button
+        type="button"
+        class="add-btn"
+        data-add-to-cart
+        data-id="{{ product.id }}"
+        data-name="{{ product.name }}"
+        data-price="{{ product.price }}"
+        aria-label="Добавить в корзину"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+      </button>
     </div>
-    <button
-      type="button"
-      class="btn btn-blue"
-      data-add-to-cart
-      data-id="{{ product.id }}"
-      data-name="{{ product.name }}"
-      data-price="{{ product.price }}"
-    >Добавить в корзину</button>
   </div>
-</section>
-{% endblock %}
+</article>
