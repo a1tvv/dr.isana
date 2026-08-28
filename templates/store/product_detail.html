@@ -16,22 +16,22 @@
   <div class="product-body">
     <a href="{{ product.get_absolute_url|default:'#' }}" class="product-name">{{ product.name }}</a>
     {% if product.description %}<div class="product-desc">{{ product.description|truncatewords:16 }}</div>{% endif %}
-    <div class="product-foot">
+    <div class="product-price-row">
       <span class="product-price">
         {{ product.price }} сом
         {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
       </span>
-      <button
-        type="button"
-        class="add-btn"
-        data-add-to-cart
-        data-id="{{ product.id }}"
-        data-name="{{ product.name }}"
-        data-price="{{ product.price }}"
-        aria-label="Добавить в корзину"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
-      </button>
     </div>
+    <button
+      type="button"
+      class="add-btn-pill"
+      data-add-to-cart
+      data-id="{{ product.id }}"
+      data-name="{{ product.name }}"
+      data-price="{{ product.price }}"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      В корзину
+    </button>
   </div>
 </article>
