@@ -208,7 +208,11 @@
       if (rm) { removeItem(rm.dataset.remove); return; }
     });
 
-    var modal = document.querySelector('[data-checkout-modal]');
-    if (modal) modal.addEventListener('click', function (e) { e.stopPropagation(); });
+    var checkoutOverlayEl = document.querySelector('[data-checkout-overlay]');
+    if (checkoutOverlayEl) {
+      checkoutOverlayEl.addEventListener('click', function (e) {
+        if (e.target === checkoutOverlayEl) closeCheckout();
+      });
+    }
   });
 })();
