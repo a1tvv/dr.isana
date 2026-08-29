@@ -15,7 +15,7 @@
   --danger: #D64545;
   --green: #3FA24C;
   --max-w: 1240px;
-  --font: 'Plus Jakarta Sans', sans-serif;
+  --font: 'Raleway', sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -47,8 +47,11 @@ details > summary::-webkit-details-marker { display: none; }
 .cart-btn {
   position: relative; background: transparent; border: 1px solid var(--border); border-radius: 10px;
   width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
-.cart-btn svg { width: 17px; height: 17px; fill: none; stroke: var(--navy); stroke-width: 1.8; }
+.cart-btn svg { width: 17px; height: 17px; fill: none; stroke: var(--navy); stroke-width: 1.8; transition: stroke 0.15s ease; }
+.cart-btn:hover { background: var(--bg-blue); border-color: var(--blue); }
+.cart-btn:hover svg { stroke: var(--blue); }
 .cart-count {
   position: absolute; top: -6px; right: -6px; background: var(--blue); color: #FFFFFF;
   font-size: 11px; font-weight: 700; border-radius: 999px; min-width: 18px; height: 18px;
@@ -58,7 +61,10 @@ details > summary::-webkit-details-marker { display: none; }
 .header-whatsapp {
   font-size: 13px; font-weight: 700; color: #FFFFFF; background: var(--navy);
   border-radius: 999px; padding: 11px 22px; white-space: nowrap;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
+.header-whatsapp:hover { background: var(--blue); }
+.header-whatsapp:active { transform: scale(0.97); }
 
 /* ===== Buttons ===== */
 .btn { border: none; cursor: pointer; font-family: var(--font); font-weight: 700; }

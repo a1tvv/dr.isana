@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Product
@@ -7,8 +8,23 @@ admin.site.site_title = 'Dr. Isana'
 admin.site.index_title = 'Управление магазином'
 
 
+class ProductAdminForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+        widgets = {
+            'category': forms.RadioSelect,
+        }
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    form = ProductAdminForm
+
+    class Media:
+        css = {'all': ('store/css/admin-custom.css',)}
+        js = ('store/js/admin-live-preview.js',)
+
     list_display = ('thumbnail', 'name', 'category', 'price', 'old_price', 'created_at')
     list_display_links = ('thumbnail', 'name')
     list_editable = ('price',)
