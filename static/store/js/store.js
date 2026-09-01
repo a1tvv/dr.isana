@@ -206,6 +206,27 @@
       if (dec) { decQty(dec.dataset.dec); return; }
       var rm = e.target.closest('[data-remove]');
       if (rm) { removeItem(rm.dataset.remove); return; }
+
+      var descToggle = e.target.closest('[data-desc-toggle]');
+      if (descToggle) {
+        var desc = descToggle.previousElementSibling;
+        var expanded = desc.classList.toggle('is-expanded');
+        descToggle.textContent = expanded ? 'Свернуть' : 'Далее';
+        return;
+      }
+
+      var card = e.target.closest('[data-card-link]');
+      if (card && !e.target.closest('[data-add-to-cart]') && !e.target.closest('a')) {
+        window.location.href = card.dataset.cardLink;
+        return;
+      }
+    });
+
+    document.querySelectorAll('[data-desc]').forEach(function (desc) {
+      if (desc.scrollHeight > desc.clientHeight + 1) {
+        var toggle = desc.nextElementSibling;
+        if (toggle && toggle.hasAttribute('data-desc-toggle')) toggle.style.display = 'inline-block';
+      }
     });
 
     var checkoutOverlayEl = document.querySelector('[data-checkout-overlay]');

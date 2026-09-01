@@ -15,7 +15,10 @@
   </div>
   <div class="product-body">
     <a href="{{ product.get_absolute_url|default:'#' }}" class="product-name">{{ product.name }}</a>
-    {% if product.description %}<div class="product-desc">{{ product.description|truncatewords:16 }}</div>{% endif %}
+    {% if product.description %}
+      <div class="product-desc" data-desc>{{ product.description }}</div>
+      <button type="button" class="desc-toggle" data-desc-toggle>Далее</button>
+    {% endif %}
     <div class="product-price-row">
       <span class="product-price">
         {{ product.price }} сом
