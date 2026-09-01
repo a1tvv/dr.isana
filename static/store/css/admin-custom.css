@@ -114,9 +114,9 @@ html[data-theme="dark"] {
   display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #D6E2F5;
   border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 14px;
 }
-#id_category input[type="radio"] { width: 16px; height: 16px; margin: 0; accent-color: var(--admin-navy); }
+#id_category input[type="radio"] { width: 16px; height: 16px; margin: 0; accent-color: var(--secondary); }
 #id_category input[type="radio"]:checked + label,
-#id_category label:has(input:checked) { background: var(--admin-navy); color: #FFFFFF; border-color: var(--admin-navy); }
+#id_category label:has(input:checked) { background: var(--secondary); color: #FFFFFF; border-color: var(--secondary); }
 
 /* ===== Страница входа ===== */
 body.login {
