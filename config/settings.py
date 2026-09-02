@@ -110,8 +110,12 @@ else:
         "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
         "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
     }
-    MEDIA_URL = 'uploads/'
-    MEDIA_ROOT = BASE_DIR / 'uploads'
+
+# MEDIA_URL — всегда непустой, вне зависимости от USE_SPACES.
+# Если оставить пустым, static() в urls.py генерирует паттерн,
+# который перехватывает вообще любой путь (баг с 404 на /panel-9x2k).
+MEDIA_URL = 'uploads/'
+MEDIA_ROOT = BASE_DIR / 'uploads'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
