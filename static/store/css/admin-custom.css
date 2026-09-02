@@ -269,3 +269,28 @@ body.login {
     align-items: flex-start !important;
   }
 }
+
+/* ===== Скрыть "К основному" (skip-link) до фокуса клавиатурой —
+   стандартный способ Django почему-то не прятал её визуально ===== */
+.skip-to-content-link {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  top: auto !important;
+}
+.skip-to-content-link:focus {
+  position: fixed !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 999 !important;
+  padding: 8px 14px !important;
+  background: #0A1F44 !important;
+  color: #FFFFFF !important;
+}
