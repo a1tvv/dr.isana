@@ -233,3 +233,39 @@ body.login {
   #user-tools { line-height: 2 !important; }
   #user-tools a, #user-tools form { margin-right: 4px; }
 }
+
+/* =====================================================
+   Шапка — принудительно горизонтальная раскладка
+   (название слева, «Добро пожаловать...» справа)
+   на любой ширине экрана, кроме совсем узкого телефона.
+   Django сам переключает на столбик уже при 1024px —
+   это слишком рано и выглядит криво, перебиваем.
+   ===================================================== */
+#header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  column-gap: 24px;
+}
+#user-tools {
+  float: none !important;
+  display: flex !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  line-height: 1.4 !important;
+}
+#user-tools form {
+  display: inline-flex !important;
+  margin: 0 !important;
+}
+
+/* Только на реально маленьком телефоне — в столбик */
+@media (max-width: 480px) {
+  #header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
