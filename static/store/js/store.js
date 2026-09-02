@@ -24,10 +24,10 @@
     return div.innerHTML;
   }
 
-  function addToCart(id, name, price) {
+  function addToCart(id, name, price, image) {
     var cart = getCart();
     if (cart[id]) cart[id].qty += 1;
-    else cart[id] = { id: id, name: name, price: Number(price), qty: 1 };
+    else cart[id] = { id: id, name: name, price: Number(price), qty: 1, image: image || '' };
     saveCart(cart);
     openCart();
   }
@@ -75,7 +75,11 @@
 
     body.innerHTML = ids.map(function (id) {
       var it = cart[id];
+      var imgHtml = it.image
+        ? '<img class="cart-line-img" src="' + escapeHtml(it.image) + '" alt="">'
+        : '';
       return '<div class="cart-line">' +
+        imgHtml +
         '<div class="cart-line-info">' +
           '<div class="cart-line-name">' + escapeHtml(it.name) + '</div>' +
           '<div class="cart-line-price">' + fmt(it.price) + ' × ' + it.qty + '</div>' +
@@ -191,7 +195,7 @@
       var addBtn = e.target.closest('[data-add-to-cart]');
       if (addBtn) {
         e.preventDefault();
-        addToCart(addBtn.dataset.id, addBtn.dataset.name, addBtn.dataset.price);
+        addToCart(addBtn.dataset.id, addBtn.dataset.name, addBtn.dataset.price, addBtn.dataset.image);
         return;
       }
       if (e.target.closest('[data-open-cart]')) { e.preventDefault(); openCart(); return; }
@@ -234,6 +238,23 @@
       checkoutOverlayEl.addEventListener('click', function (e) {
         if (e.target === checkoutOverlayEl) closeCheckout();
       });
+    }
+
+    var revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+      if ('IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      }
     }
   });
 })();

@@ -1,5 +1,5 @@
 {% load static %}
-<article class="product-card">
+<article class="product-card" data-card-link="{{ product.get_absolute_url|default:'#' }}">
   <div class="product-media">
     <a href="{{ product.get_absolute_url|default:'#' }}">
       {% if product.image %}
@@ -32,6 +32,7 @@
       data-id="{{ product.id }}"
       data-name="{{ product.name }}"
       data-price="{{ product.price }}"
+      data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.jpg' %}{% endif %}"
     >
       <span>В корзину</span>
       <span class="cart-icon-wrap">

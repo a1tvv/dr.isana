@@ -5,7 +5,7 @@
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-copy">
+    <div class="hero-copy reveal">
       <div class="kicker"><span class="kicker-dot"></span>Только оригинальные препараты</div>
       <h1 class="hero-title">Препараты для косметологов, которым можно доверять</h1>
       <p class="hero-sub">PDRN, PLLA и филлеры напрямую от поставщика. Без посредников, без подделок. Доставка по Бишкеку.</p>
@@ -14,12 +14,16 @@
         <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn-link-underline">Написать менеджеру</a>
       </div>
     </div>
-    <div class="hero-media-row">
+    <div class="hero-media-row reveal reveal-delay-1">
       {% if hero_image %}
         <img src="{{ hero_image.url }}" alt="Dr. Isana">
       {% else %}
         <img src="{% static 'store/img/hero.png' %}" alt="Dr. Isana">
       {% endif %}
+      <div class="hero-stat">
+        <span class="hero-stat-num">100%</span>
+        <span class="hero-stat-label">оригинал</span>
+      </div>
     </div>
   </div>
 </section>
@@ -36,7 +40,7 @@
     <a href="{% url 'store:catalog' %}?category=filler" class="catalog-tab">Филлеры</a>
   </div>
 
-  <div class="product-grid" data-product-grid>
+  <div class="product-grid reveal" data-product-grid>
     {% for product in bestsellers %}
       {% include 'store/partials/product_card.html' with product=product %}
     {% empty %}
@@ -50,7 +54,7 @@
 </section>
 
 <section class="doctor-section">
-  <div class="doctor-card">
+  <div class="doctor-card reveal">
     <div class="doctor-avatar">
       {% if about_image %}<img src="{{ about_image.url }}" alt="Dr. Isana">{% else %}DI{% endif %}
     </div>
@@ -71,7 +75,7 @@
     <div class="kicker" style="justify-content:center;">Перед заявкой</div>
     <h2 class="section-title">Частые вопросы</h2>
   </div>
-  <div class="faq-list">
+  <div class="faq-list reveal">
     <details class="faq-item">
       <summary>Как быстро доставляете?</summary>
       <div class="faq-answer">Доставка по Бишкеку в течение дня. Точные сроки уточнит менеджер после оформления заказа.</div>

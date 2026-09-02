@@ -25,6 +25,7 @@
       data-id="{{ product.id }}"
       data-name="{{ product.name }}"
       data-price="{{ product.price }}"
+      data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.jpg' %}{% endif %}"
     >Добавить в корзину</button>
   </div>
 </section>
