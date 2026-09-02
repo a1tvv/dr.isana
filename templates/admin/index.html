@@ -15,12 +15,6 @@
     <div class="di-dash-sub">Админка</div>
   </div>
 </div>
-<div class="di-dash-meta">
-  Добро пожаловать, <strong>{{ request.user }}</strong>
-  &middot; <a href="/">Открыть сайт</a>
-  &middot; <a href="{% url 'admin:password_change' %}">Изменить пароль</a>
-  &middot; <a href="{% url 'admin:logout' %}">Выйти</a>
-</div>
 
 {% for app in app_list %}
   {% if app.app_label != 'auth' %}
