@@ -15,10 +15,17 @@
     <div class="di-dash-sub">Админка</div>
   </div>
 </div>
+<div class="di-dash-meta">
+  Добро пожаловать, <strong>{{ request.user }}</strong>
+  &middot; <a href="/">Открыть сайт</a>
+  &middot; <a href="{% url 'admin:password_change' %}">Изменить пароль</a>
+  &middot; <a href="{% url 'admin:logout' %}">Выйти</a>
+</div>
 
 {% for app in app_list %}
+  {% if app.app_label != 'auth' %}
   <div class="di-section-label">
-    {% if app.app_label == 'store' %}Каталог{% elif app.app_label == 'auth' %}Пользователи и доступ{% else %}{{ app.name }}{% endif %}
+    {% if app.app_label == 'store' %}Каталог{% else %}{{ app.name }}{% endif %}
   </div>
   <div class="di-app-card">
     {% for model in app.models %}
@@ -28,10 +35,6 @@
           <span class="di-icon-box">
             {% if model_name == 'product' %}
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path></svg>
-            {% elif model_name == 'group' %}
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            {% elif model_name == 'user' %}
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             {% else %}
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle></svg>
             {% endif %}
@@ -50,6 +53,7 @@
       {% endwith %}
     {% endfor %}
   </div>
+  {% endif %}
 {% endfor %}
 {% endblock %}
 
