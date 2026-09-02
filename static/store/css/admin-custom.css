@@ -1,74 +1,64 @@
 /* =====================================================
    Dr. Isana — admin panel, brand colors
-   Работает через переменные темы Django (а не поверх
-   отдельных элементов) — поэтому не ломается тёмной
-   темой ОС и не зависит от переключателя light/dark.
+   Прямые правила на элементы (не через CSS-переменные
+   темы) — переменные в этой версии Django почему-то
+   не срабатывали на проде, прямые селекторы с
+   !important работают гарантированно.
    ===================================================== */
 
-:root,
-html[data-theme="light"],
-html[data-theme="dark"] {
-  --primary: #5BA6FF !important;
-  --secondary: #0A1F44 !important;
-  --accent: #5BA6FF !important;
-  --primary-fg: #FFFFFF !important;
-
-  --body-bg: #FFFFFF !important;
-  --body-fg: #0A1F44 !important;
-  --body-quiet-color: #5A6C8C !important;
-  --body-loud-color: #0A1F44 !important;
-
-  --header-color: #FFFFFF !important;
-  --header-bg: #0A1F44 !important;
-  --header-branding-color: #FFFFFF !important;
-  --header-link-color: #FFFFFF !important;
-
-  --breadcrumbs-bg: #F0F7FF !important;
-  --breadcrumbs-fg: #354866 !important;
-  --breadcrumbs-link-fg: #0A1F44 !important;
-
-  --link-fg: #0A1F44 !important;
-  --link-hover-color: #5BA6FF !important;
-  --link-selected-fg: #5BA6FF !important;
-
-  --hairline-color: #E6ECF5 !important;
-  --border-color: #E6ECF5 !important;
-
-  --button-fg: #FFFFFF !important;
-  --button-bg: #0A1F44 !important;
-  --button-hover-bg: #5BA6FF !important;
-  --default-button-bg: #0A1F44 !important;
-  --default-button-hover-bg: #5BA6FF !important;
-
-  --darkened-bg: #F5F8FD !important;
-  --selected-bg: #F0F7FF !important;
+body {
+  background: #FFFFFF !important;
+  color: #0A1F44 !important;
 }
 
-/* Тот же набор — на случай "auto" темы, до первого клика по переключателю */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #5BA6FF !important;
-    --secondary: #0A1F44 !important;
-    --accent: #5BA6FF !important;
-    --primary-fg: #FFFFFF !important;
-    --body-bg: #FFFFFF !important;
-    --body-fg: #0A1F44 !important;
-    --body-quiet-color: #5A6C8C !important;
-    --header-bg: #0A1F44 !important;
-    --header-color: #FFFFFF !important;
-    --header-branding-color: #FFFFFF !important;
-    --breadcrumbs-bg: #F0F7FF !important;
-    --breadcrumbs-fg: #354866 !important;
-    --breadcrumbs-link-fg: #0A1F44 !important;
-    --link-fg: #0A1F44 !important;
-    --button-bg: #0A1F44 !important;
-    --default-button-bg: #0A1F44 !important;
-    --border-color: #E6ECF5 !important;
-    --darkened-bg: #F5F8FD !important;
-  }
+#header {
+  background: #0A1F44 !important;
+  color: #FFFFFF !important;
+}
+#header a:link, #header a:visited,
+#site-name a:link, #site-name a:visited,
+#user-tools a:link, #user-tools a:visited {
+  color: #FFFFFF !important;
+}
+#header a:hover, #user-tools a:hover {
+  color: #5BA6FF !important;
+}
+#user-tools form button {
+  color: #FFFFFF !important;
+  background: none !important;
+  border: none !important;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-/* Переключатель темы больше не нужен — цвет теперь всегда фирменный */
+.breadcrumbs {
+  background: #F0F7FF !important;
+  color: #354866 !important;
+}
+.breadcrumbs a:link, .breadcrumbs a:visited {
+  color: #0A1F44 !important;
+}
+
+a:link, a:visited {
+  color: #0A1F44;
+}
+a:hover {
+  color: #5BA6FF;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  background: #0A1F44 !important;
+  color: #FFFFFF !important;
+  border-radius: 8px;
+  border: none !important;
+}
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover {
+  background: #5BA6FF !important;
+}
+.button.default, input[type=submit].default {
+  background: #5BA6FF !important;
+}
+
 .theme-toggle {
   display: none !important;
 }
@@ -84,13 +74,11 @@ html[data-theme="dark"] {
 .module h2, .module caption {
   border-radius: 0;
   font-weight: 600;
+  background: #0A1F44 !important;
+  color: #FFFFFF !important;
 }
 #content h1 {
   color: #0A1F44;
-}
-
-.button, input[type=submit], input[type=button], .submit-row input, a.button {
-  border-radius: 8px;
 }
 
 /* Крупнее поле цены в списке — легче попасть пальцем / кликом */
@@ -114,18 +102,20 @@ html[data-theme="dark"] {
   display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #D6E2F5;
   border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 14px;
 }
-#id_category input[type="radio"] { width: 16px; height: 16px; margin: 0; accent-color: var(--secondary); }
+#id_category input[type="radio"] { width: 16px; height: 16px; margin: 0; accent-color: #0A1F44; }
 #id_category input[type="radio"]:checked + label,
-#id_category label:has(input:checked) { background: var(--secondary); color: #FFFFFF; border-color: var(--secondary); }
+#id_category label:has(input:checked) { background: #0A1F44 !important; color: #FFFFFF !important; border-color: #0A1F44 !important; }
 
 /* ===== Страница входа ===== */
 body.login {
-  background: #F5F8FD;
+  background: #F5F8FD !important;
 }
 .login #container {
   border: 1px solid #E6ECF5;
   border-radius: 14px;
   box-shadow: 0 8px 24px rgba(10,31,68,0.08);
+  max-width: 480px;
+  margin: 60px auto;
 }
 .login .form-row label {
   color: #0A1F44;
@@ -133,4 +123,7 @@ body.login {
 }
 .login .submit-row {
   text-align: center;
+}
+.login .submit-row input {
+  background: #0A1F44 !important;
 }
