@@ -29,4 +29,17 @@
     >Добавить в корзину</button>
   </div>
 </section>
-{% endblock %}
+
+{% if related_products %}
+<section class="section reveal">
+  <div class="section-center" style="margin-bottom:32px;">
+    <h2 class="section-title">Похожие товары</h2>
+  </div>
+  <div class="product-grid">
+    {% for product in related_products %}
+      {% include 'store/partials/product_card.html' with product=product %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}git add . && git commit -m "add related products section" && git push
