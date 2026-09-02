@@ -340,3 +340,17 @@ ol.breadcrumbs li:not(:last-child)::after {
   margin-left: 8px;
   color: #7386A8;
 }
+
+/* ===== Убрать боковую панель-переключатель (nav-sidebar) —
+   у нас всего 3 модели в админке, она только путает и
+   выглядит сломанной (чёрный кружок без иконки, обрезанное
+   поле поиска). Пользователь и так видит все разделы на
+   главной странице дашборда. ===== */
+.toggle-nav-sidebar,
+#nav-sidebar {
+  display: none !important;
+}
+.main > #nav-sidebar + .content,
+.main.shifted > #nav-sidebar + .content {
+  margin-left: 0 !important;
+}
