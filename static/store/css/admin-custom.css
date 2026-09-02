@@ -162,7 +162,10 @@ body.login {
 /* =====================================================
    Кастомный дашборд главной страницы админки
    ===================================================== */
-.di-dash-header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+.di-dash-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; flex-wrap: wrap; }
+.di-dash-meta { margin-left: auto; font-size: 13px; color: #7386A8; }
+.di-dash-meta a { color: #0A1F44; }
+.di-dash-meta a:hover { color: #5BA6FF; }
 .di-dash-avatar {
   width: 42px; height: 42px; border-radius: 10px; background: #0A1F44; color: #FFFFFF;
   display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0;
@@ -299,4 +302,41 @@ body.login {
    стандартная навy-полоса Django тут дублирует то же самое, прячем ===== */
 body.di-dashboard #header {
   display: none !important;
+}
+
+/* ===== Убрать дефолтную навy-шапку Django ТОЛЬКО с главной
+   страницы дашборда — она дублирует наш собственный блок
+   "Dr. Isana / Админка" ниже. На остальных страницах
+   (список товаров, формы, логин) шапка остаётся как была —
+   там это единственное место для "Выйти"/"Изменить пароль". ===== */
+body.di-dashboard #header {
+  display: none !important;
+}
+
+/* ===== Хлебные крошки — принудительно горизонтальная строка
+   с разделителем ›, без номеров списка. По какой-то причине
+   штатное inline-block от Django на них не срабатывает. ===== */
+.breadcrumbs, ol.breadcrumbs {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 12px 24px !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.breadcrumbs li, ol.breadcrumbs li {
+  display: inline-flex !important;
+  align-items: center;
+  list-style: none !important;
+  font-size: 13px;
+}
+.breadcrumbs li::marker, ol.breadcrumbs li::marker {
+  content: none !important;
+}
+.breadcrumbs li:not(:last-child)::after,
+ol.breadcrumbs li:not(:last-child)::after {
+  content: '\203A';
+  margin-left: 8px;
+  color: #7386A8;
 }
