@@ -65,6 +65,7 @@ details > summary::-webkit-details-marker { display: none; }
 }
 .header-whatsapp:hover { background: var(--blue); }
 .header-whatsapp:active { transform: scale(0.97); }
+.burger-btn { display: none; }
 
 /* ===== Buttons ===== */
 .btn { border: none; cursor: pointer; font-family: var(--font); font-weight: 700; }
@@ -366,7 +367,7 @@ details > summary::-webkit-details-marker { display: none; }
 
 /* ===== Бургер-меню на мобилке ===== */
 .burger-btn {
-  display: none; background: transparent; border: 1px solid var(--border); border-radius: 10px;
+  background: transparent; border: 1px solid var(--border); border-radius: 10px;
   width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
