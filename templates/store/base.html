@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'store/css/style.css' %}?v=3">
   {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -42,11 +42,16 @@
     </div>
 
     <nav class="mobile-nav" aria-label="Мобильная навигация" data-mobile-nav>
+      <div class="mobile-nav-head">
+        <span class="mobile-nav-title">Меню</span>
+        <button type="button" class="mobile-nav-close" aria-label="Закрыть меню" data-close-mobile-nav>&times;</button>
+      </div>
       <a href="{% url 'store:home' %}" class="mobile-nav-link {% if active_page == 'home' %}is-active{% endif %}">Главная</a>
       <a href="{% url 'store:catalog' %}" class="mobile-nav-link {% if active_page == 'catalog' %}is-active{% endif %}">Каталог</a>
       <a href="{% url 'store:about' %}" class="mobile-nav-link {% if active_page == 'about' %}is-active{% endif %}">О враче</a>
       <a href="{% url 'store:reviews' %}" class="mobile-nav-link {% if active_page == 'reviews' %}is-active{% endif %}">Отзывы</a>
     </nav>
+    <div class="mobile-nav-overlay" data-mobile-nav-overlay data-close-mobile-nav></div>
   </header>
 
   <main>{% block content %}{% endblock %}</main>
@@ -117,7 +122,7 @@
     </div>
   </div>
 
-  <script src="{% static 'store/js/store.js' %}" charset="utf-8"></script>
+  <script src="{% static 'store/js/store.js' %}?v=3" charset="utf-8"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

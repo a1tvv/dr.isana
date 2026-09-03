@@ -120,6 +120,26 @@
     if (o) o.classList.remove('is-open');
   }
 
+  /* ================= Мобильное меню ================= */
+
+  function openMobileNav() {
+    var o = document.querySelector('[data-mobile-nav-overlay]');
+    var d = document.querySelector('[data-mobile-nav]');
+    var burger = document.querySelector('[data-burger-toggle]');
+    if (o) o.classList.add('is-open');
+    if (d) d.classList.add('is-open');
+    if (burger) burger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMobileNav() {
+    var o = document.querySelector('[data-mobile-nav-overlay]');
+    var d = document.querySelector('[data-mobile-nav]');
+    var burger = document.querySelector('[data-burger-toggle]');
+    if (o) o.classList.remove('is-open');
+    if (d) d.classList.remove('is-open');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+  }
+
   function submitOrder() {
     var cart = getCart();
     var ids = Object.keys(cart);
@@ -219,13 +239,9 @@
         return;
       }
 
-      var burger = e.target.closest('[data-burger-toggle]');
-      if (burger) {
-        var mobileNav = document.querySelector('[data-mobile-nav]');
-        var isOpen = mobileNav.classList.toggle('is-open');
-        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        return;
-      }
+      if (e.target.closest('[data-burger-toggle]')) { e.preventDefault(); openMobileNav(); return; }
+      if (e.target.closest('[data-close-mobile-nav]')) { e.preventDefault(); closeMobileNav(); return; }
+      if (e.target.closest('[data-mobile-nav] .mobile-nav-link')) { closeMobileNav(); return; }
 
       var card = e.target.closest('[data-card-link]');
       if (card && !e.target.closest('[data-add-to-cart]') && !e.target.closest('a')) {
