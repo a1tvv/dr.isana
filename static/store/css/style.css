@@ -388,17 +388,20 @@ details > summary::-webkit-details-marker { display: none; }
   padding: 22px 24px; border-bottom: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center;
 }
-.mobile-nav-title { font-size: 17px; font-weight: 800; color: var(--navy); }
 .mobile-nav-close { cursor: pointer; font-size: 22px; line-height: 1; color: var(--text-faint); background: none; border: none; }
+.mobile-nav-links { display: flex; flex-direction: column; padding: 10px; overflow-y: auto; }
 .mobile-nav-link {
-  padding: 16px 24px;
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 14px;
+  border-radius: 10px;
   font-size: 15px;
   font-weight: 600;
   color: var(--text-muted);
-  border-bottom: 1px solid #F0F3F9;
 }
-.mobile-nav-link:last-child { border-bottom: none; }
-.mobile-nav-link.is-active { color: var(--navy); }
+.mobile-nav-link:hover { background: var(--bg-blue); }
+.mobile-nav-link.is-active { color: var(--navy); background: var(--bg-blue); }
+.mobile-nav-icon { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.mobile-nav-foot { margin-top: auto; padding: 20px 20px 24px; border-top: 1px solid var(--border); }
 
 @media (max-width: 600px) {
   .mobile-nav { width: 100%; max-width: 100%; }
