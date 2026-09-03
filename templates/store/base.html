@@ -35,8 +35,18 @@
           <span class="cart-count is-hidden" data-cart-count>0</span>
         </button>
         <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="header-whatsapp">WhatsApp</a>
+        <button class="burger-btn" type="button" aria-label="Меню" aria-expanded="false" data-burger-toggle>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
       </div>
     </div>
+
+    <nav class="mobile-nav" aria-label="Мобильная навигация" data-mobile-nav>
+      <a href="{% url 'store:home' %}" class="mobile-nav-link {% if active_page == 'home' %}is-active{% endif %}">Главная</a>
+      <a href="{% url 'store:catalog' %}" class="mobile-nav-link {% if active_page == 'catalog' %}is-active{% endif %}">Каталог</a>
+      <a href="{% url 'store:about' %}" class="mobile-nav-link {% if active_page == 'about' %}is-active{% endif %}">О враче</a>
+      <a href="{% url 'store:reviews' %}" class="mobile-nav-link {% if active_page == 'reviews' %}is-active{% endif %}">Отзывы</a>
+    </nav>
   </header>
 
   <main>{% block content %}{% endblock %}</main>

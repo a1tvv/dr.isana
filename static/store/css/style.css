@@ -316,6 +316,8 @@ details > summary::-webkit-details-marker { display: none; }
 
 @media (max-width: 960px) {
   .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .mobile-nav.is-open { display: flex; }
   .hero-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
   .hero-media-row { flex-direction: column; }
   .hero-media-row img { height: 260px; }
@@ -362,3 +364,29 @@ details > summary::-webkit-details-marker { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ===== Бургер-меню на мобилке ===== */
+.burger-btn {
+  display: none; background: transparent; border: 1px solid var(--border); border-radius: 10px;
+  width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.burger-btn svg { width: 18px; height: 18px; fill: none; stroke: var(--navy); stroke-width: 1.8; }
+.burger-btn:hover { background: var(--bg-blue); border-color: var(--blue); }
+
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 8px 20px 16px;
+}
+.mobile-nav-link {
+  padding: 14px 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid #F0F3F9;
+}
+.mobile-nav-link:last-child { border-bottom: none; }
+.mobile-nav-link.is-active { color: var(--navy); }

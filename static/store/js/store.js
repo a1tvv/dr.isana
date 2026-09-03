@@ -219,6 +219,14 @@
         return;
       }
 
+      var burger = e.target.closest('[data-burger-toggle]');
+      if (burger) {
+        var mobileNav = document.querySelector('[data-mobile-nav]');
+        var isOpen = mobileNav.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        return;
+      }
+
       var card = e.target.closest('[data-card-link]');
       if (card && !e.target.closest('[data-add-to-cart]') && !e.target.closest('a')) {
         window.location.href = card.dataset.cardLink;
