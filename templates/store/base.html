@@ -27,6 +27,7 @@
         <a href="{% url 'store:catalog' %}" class="nav-link {% if active_page == 'catalog' %}is-active{% endif %}">Каталог</a>
         <a href="{% url 'store:about' %}" class="nav-link {% if active_page == 'about' %}is-active{% endif %}">О нас</a>
         <a href="{% url 'store:reviews' %}" class="nav-link {% if active_page == 'reviews' %}is-active{% endif %}">Отзывы</a>
+        <a href="{% url 'admin:index' %}" class="nav-link">Личный кабинет</a>
       </nav>
 
       <div class="header-actions">
@@ -62,6 +63,10 @@
         <a href="{% url 'store:reviews' %}" class="mobile-nav-link {% if active_page == 'reviews' %}is-active{% endif %}">
           <svg class="mobile-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L12 16.9 6.4 20l1.4-6.2L3 9.5l6.4-.6z"></path></svg>
           <span>Отзывы</span>
+        </a>
+        <a href="{% url 'admin:index' %}" class="mobile-nav-link">
+          <svg class="mobile-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+          <span>Личный кабинет</span>
         </a>
       </div>
       <div class="mobile-nav-foot">
