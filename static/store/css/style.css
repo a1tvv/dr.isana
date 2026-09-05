@@ -112,7 +112,7 @@ details > summary::-webkit-details-marker { display: none; }
 }
 
 .hero-illustration {
-  flex: 1; height: 360px; border-radius: 18px; background: var(--bg-blue);
+  flex: 1; height: 360px; border-radius: 18px; background: var(--bg); border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center; min-width: 0;
 }
 .hero-illustration svg { width: 110px; height: 110px; fill: none; stroke: var(--navy); stroke-width: 1.3; }
