@@ -31,6 +31,44 @@ details > summary::-webkit-details-marker { display: none; }
 
 .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
 
+/* ===== Бегущая полоса (как на californiabiomedics.com) ===== */
+.ticker-bar {
+  background: var(--navy);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+}
+.ticker-track {
+  display: inline-flex;
+  width: max-content;
+  animation: ticker-scroll 26s linear infinite;
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  padding: 0 28px;
+}
+.ticker-item:not(:last-child)::after {
+  content: '•';
+  margin-left: 28px;
+  color: var(--blue);
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-bar:hover .ticker-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+}
+
 /* ===== Header ===== */
 .site-header { position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 1px solid var(--border); }
 .header-inner {
