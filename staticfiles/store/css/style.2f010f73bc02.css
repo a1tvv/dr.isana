@@ -94,7 +94,7 @@ details > summary::-webkit-details-marker { display: none; }
 .hero-sub { font-size: 16px; line-height: 1.7; color: var(--text-muted); max-width: 440px; margin: 0 0 34px; }
 .hero-actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .hero-media-row { display: flex; gap: 20px; min-width: 0; }
-.hero-media-row img { flex: 1; height: 360px; object-fit: cover; border-radius: 18px; background: var(--bg-blue); min-width: 0; }
+.hero-media-row img { flex: 1; height: 360px; object-fit: cover; border-radius: 18px; background: var(--bg); min-width: 0; }
 
 /* ===== Section ===== */
 .section { max-width: var(--max-w); margin: 0 auto; padding: 70px 32px 90px; }
