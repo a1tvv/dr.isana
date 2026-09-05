@@ -27,7 +27,7 @@ html[data-theme="dark"] {
   --primary-fg: #FFFFFF !important;
 
   --body-fg: #0A1F44 !important;
-  --body-bg: #FFFFFF !important;
+  --body-bg: #FFFFF0 !important;
   --body-quiet-color: #666666 !important;
   --body-medium-color: #444444 !important;
   --body-loud-color: #000000 !important;
@@ -75,7 +75,7 @@ html[data-theme="dark"] {
 }
 
 body {
-  background: #FFFFFF !important;
+  background: #FFFFF0 !important;
   color: #0A1F44 !important;
   font-family: 'Raleway', sans-serif !important;
 }
@@ -219,7 +219,7 @@ body.login {
   box-shadow: 0 8px 24px rgba(10,31,68,0.08);
   max-width: 480px;
   margin: 60px auto;
-  background: #FFFFFF;
+  background: #FFFFF0;
 }
 .login .form-row label {
   color: #0A1F44;
@@ -254,7 +254,7 @@ body.login {
   color: #7386A8; margin: 24px 0 10px;
 }
 .di-app-card {
-  background: #FFFFFF; border: 1px solid #E6ECF5; border-radius: 12px; overflow: hidden;
+  background: #FFFFF0; border: 1px solid #E6ECF5; border-radius: 12px; overflow: hidden;
 }
 .di-model-row {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -278,7 +278,7 @@ body.login {
 .di-btn-change:hover { background: #E6ECF5 !important; }
 
 .di-actions-card {
-  background: #FFFFFF; border: 1px solid #E6ECF5; border-radius: 12px; overflow: hidden;
+  background: #FFFFF0; border: 1px solid #E6ECF5; border-radius: 12px; overflow: hidden;
 }
 .di-action-row {
   display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #F0F3F9;

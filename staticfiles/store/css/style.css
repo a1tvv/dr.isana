@@ -2,7 +2,7 @@
 :root {
   --navy: #0A1F44;
   --blue: #5BA6FF;
-  --bg: #FFFFFF;
+  --bg: #FFFFF0;
   --bg-blue: #F0F7FF;
   --border: #E6ECF5;
   --border-2: #D6E2F5;
@@ -252,7 +252,7 @@ details > summary::-webkit-details-marker { display: none; }
 .buy-now-btn:hover { background: var(--blue); }
 .buy-now-btn:active { transform: scale(0.98); }
 .add-cart-btn-outline {
-  background: #FFFFFF; color: var(--navy); border: 1px solid var(--border-2);
+  background: var(--bg); color: var(--navy); border: 1px solid var(--border-2);
 }
 .add-cart-btn-outline svg { fill: none; stroke: var(--navy); stroke-width: 1.8; }
 .add-cart-btn-outline:hover { background: var(--bg-blue); border-color: var(--blue); }
