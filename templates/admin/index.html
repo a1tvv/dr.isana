@@ -1,0 +1,79 @@
+{% extends "admin/base_site.html" %}
+{% load i18n log %}
+
+{% block coltype %}colMS{% endblock %}
+{% block bodyclass %}{{ block.super }} dashboard di-dashboard{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}{% endblock %}
+
+{% block content %}
+<div class="di-dash-header">
+  <div class="di-dash-avatar">DI</div>
+  <div>
+    <h1>Dr. Isana</h1>
+    <div class="di-dash-sub">Админка</div>
+  </div>
+</div>
+
+{% for app in app_list %}
+  {% if app.app_label != 'auth' %}
+  <div class="di-section-label">
+    {% if app.app_label == 'store' %}Каталог{% else %}{{ app.name }}{% endif %}
+  </div>
+  <div class="di-app-card">
+    {% for model in app.models %}
+      {% with model_name=model.object_name|lower %}
+      <div class="di-model-row">
+        <div class="di-model-info">
+          <span class="di-icon-box">
+            {% if model_name == 'product' %}
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path></svg>
+            {% else %}
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle></svg>
+            {% endif %}
+          </span>
+          {% if model.admin_url %}
+            <a href="{{ model.admin_url }}" class="di-model-name">{{ model.name }}</a>
+          {% else %}
+            <span class="di-model-name">{{ model.name }}</span>
+          {% endif %}
+        </div>
+        <div class="di-model-actions">
+          {% if model.add_url %}<a href="{{ model.add_url }}" class="di-btn-add">Добавить</a>{% endif %}
+          {% if model.admin_url %}<a href="{{ model.admin_url }}" class="di-btn-change">Изменить</a>{% endif %}
+        </div>
+      </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+<div class="di-section-label">Последние действия</div>
+<div class="di-actions-card">
+  {% get_admin_log 10 as admin_log for_user user %}
+  {% if not admin_log %}
+    <div class="di-action-empty">Пока ничего нет</div>
+  {% else %}
+    {% for entry in admin_log %}
+      <div class="di-action-row">
+        <span class="di-action-icon {% if entry.is_addition %}is-add{% elif entry.is_change %}is-change{% elif entry.is_deletion %}is-delete{% endif %}">
+          {% if entry.is_addition %}+{% elif entry.is_deletion %}&minus;{% else %}
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path></svg>
+          {% endif %}
+        </span>
+        <div>
+          <div class="di-action-text">
+            {% if entry.is_addition %}Создано:{% elif entry.is_change %}Изменено:{% elif entry.is_deletion %}Удалено:{% endif %}
+            {% if entry.is_deletion or not entry.get_admin_url %}{{ entry.object_repr }}{% else %}<a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>{% endif %}
+          </div>
+          {% if entry.content_type %}<div class="di-action-sub">{{ entry.content_type.name|capfirst }}</div>{% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
