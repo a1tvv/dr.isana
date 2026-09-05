@@ -11,22 +11,43 @@
     {% endif %}
   </div>
   <div>
-    {% if product.get_category_display %}<div class="kicker">{{ product.get_category_display }}</div>{% endif %}
+    {% if product.get_category_display %}
+      <div class="kicker"><span class="kicker-dot"></span>{{ product.get_category_display }}</div>
+    {% endif %}
     <h1 class="detail-title">{{ product.name }}</h1>
     {% if product.description %}<p class="detail-desc">{{ product.description }}</p>{% endif %}
-    <div class="detail-price">
-      {{ product.price }} сом
-      {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
+
+    <div class="detail-price-row">
+      <div class="detail-price">
+        {{ product.price }} сом
+        {% if product.old_price %}<del>{{ product.old_price }} сом</del>{% endif %}
+      </div>
+      <div class="detail-stock"><span class="stock-dot"></span>В наличии</div>
     </div>
-    <button
-      type="button"
-      class="btn btn-blue"
-      data-add-to-cart
-      data-id="{{ product.id }}"
-      data-name="{{ product.name }}"
-      data-price="{{ product.price }}"
-      data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.jpg' %}{% endif %}"
-    >Добавить в корзину</button>
+
+    <div class="detail-buy-row" data-qty-scope>
+      <div class="qty-stepper">
+        <button type="button" class="qty-stepper-btn" data-qty-dec aria-label="Уменьшить количество">−</button>
+        <span class="qty-stepper-value" data-qty-value>1</span>
+        <button type="button" class="qty-stepper-btn" data-qty-inc aria-label="Увеличить количество">+</button>
+      </div>
+      <button
+        type="button"
+        class="add-btn-pill"
+        data-add-to-cart
+        data-id="{{ product.id }}"
+        data-name="{{ product.name }}"
+        data-price="{{ product.price }}"
+        data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.jpg' %}{% endif %}"
+      >
+        <span>Добавить в корзину</span>
+        <span class="cart-icon-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        </span>
+      </button>
+    </div>
+
+    <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn-link-underline detail-ask-link">Написать менеджеру</a>
   </div>
 </section>
 

@@ -24,10 +24,11 @@
     return div.innerHTML;
   }
 
-  function addToCart(id, name, price, image) {
+  function addToCart(id, name, price, image, qty) {
+    qty = parseInt(qty, 10) || 1;
     var cart = getCart();
-    if (cart[id]) cart[id].qty += 1;
-    else cart[id] = { id: id, name: name, price: Number(price), qty: 1, image: image || '' };
+    if (cart[id]) cart[id].qty += qty;
+    else cart[id] = { id: id, name: name, price: Number(price), qty: qty, image: image || '' };
     saveCart(cart);
     openCart();
   }
@@ -215,9 +216,34 @@
       var addBtn = e.target.closest('[data-add-to-cart]');
       if (addBtn) {
         e.preventDefault();
-        addToCart(addBtn.dataset.id, addBtn.dataset.name, addBtn.dataset.price, addBtn.dataset.image);
+        var qty = 1;
+        var scope = addBtn.closest('[data-qty-scope]');
+        if (scope) {
+          var qtyValueEl = scope.querySelector('[data-qty-value]');
+          if (qtyValueEl) qty = parseInt(qtyValueEl.textContent, 10) || 1;
+        }
+        addToCart(addBtn.dataset.id, addBtn.dataset.name, addBtn.dataset.price, addBtn.dataset.image, qty);
         return;
       }
+
+      var qtyIncBtn = e.target.closest('[data-qty-inc]');
+      if (qtyIncBtn) {
+        var incScope = qtyIncBtn.closest('[data-qty-scope]');
+        var incValueEl = incScope && incScope.querySelector('[data-qty-value]');
+        if (incValueEl) incValueEl.textContent = String((parseInt(incValueEl.textContent, 10) || 1) + 1);
+        return;
+      }
+      var qtyDecBtn = e.target.closest('[data-qty-dec]');
+      if (qtyDecBtn) {
+        var decScope = qtyDecBtn.closest('[data-qty-scope]');
+        var decValueEl = decScope && decScope.querySelector('[data-qty-value]');
+        if (decValueEl) {
+          var next = (parseInt(decValueEl.textContent, 10) || 1) - 1;
+          decValueEl.textContent = String(next < 1 ? 1 : next);
+        }
+        return;
+      }
+
       if (e.target.closest('[data-open-cart]')) { e.preventDefault(); openCart(); return; }
       if (e.target.closest('[data-close-cart]')) { e.preventDefault(); closeCart(); return; }
       if (e.target.closest('[data-open-checkout]')) { e.preventDefault(); openCheckout(); return; }
