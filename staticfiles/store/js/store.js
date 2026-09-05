@@ -210,11 +210,70 @@
     });
   }
 
+  /* ================= Карусель на главной ================= */
+
+  function initHeroCarousel() {
+    var hero = document.querySelector('[data-hero]');
+    if (!hero) return;
+    var slides = hero.querySelectorAll('[data-hero-slide]');
+    var dots = hero.querySelectorAll('[data-hero-dot]');
+    if (slides.length < 2) return;
+
+    var current = 0;
+    var timer = null;
+
+    function show(index) {
+      current = (index + slides.length) % slides.length;
+      for (var i = 0; i < slides.length; i++) slides[i].classList.toggle('is-active', i === current);
+      for (var j = 0; j < dots.length; j++) dots[j].classList.toggle('is-active', j === current);
+    }
+
+    function next() { show(current + 1); }
+    function prev() { show(current - 1); }
+
+    function stopAutoplay() { if (timer) { clearInterval(timer); timer = null; } }
+    function startAutoplay() {
+      stopAutoplay();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      timer = setInterval(next, 6000);
+    }
+
+    var prevBtn = hero.querySelector('[data-hero-prev]');
+    var nextBtn = hero.querySelector('[data-hero-next]');
+    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); startAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { next(); startAutoplay(); });
+    for (var k = 0; k < dots.length; k++) {
+      (function (idx) {
+        dots[idx].addEventListener('click', function () { show(idx); startAutoplay(); });
+      })(k);
+    }
+
+    hero.addEventListener('mouseenter', stopAutoplay);
+    hero.addEventListener('mouseleave', startAutoplay);
+
+    var touchStartX = null;
+    hero.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    hero.addEventListener('touchend', function (e) {
+      if (touchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(dx) < 40) return;
+      if (dx < 0) next(); else prev();
+      startAutoplay();
+    });
+
+    show(0);
+    startAutoplay();
+  }
+
   /* ================= Init ================= */
 
   document.addEventListener('DOMContentLoaded', function () {
     renderCart();
     initSearch();
+    initHeroCarousel();
 
     document.addEventListener('click', function (e) {
       var buyNowBtn = e.target.closest('[data-buy-now]');
