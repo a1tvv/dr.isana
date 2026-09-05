@@ -3,28 +3,85 @@
 {% block title %}Dr. Isana — оригинальные препараты для косметологов в Бишкеке{% endblock %}
 {% block content %}
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-copy reveal">
-      <div class="kicker"><span class="kicker-dot"></span>Только оригинальные препараты</div>
-      <h1 class="hero-title">Препараты для косметологов, которым можно доверять</h1>
-      <p class="hero-sub">PDRN, PLLA и филлеры напрямую от поставщика. Без посредников, без подделок. Доставка по Бишкеку.</p>
-      <div class="hero-actions">
-        <a href="{% url 'store:catalog' %}" class="btn btn-blue">Смотреть каталог</a>
-        <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn-link-underline">Написать менеджеру</a>
+<section class="hero" data-hero>
+  <div class="hero-slides">
+    <div class="hero-inner hero-slide is-active" data-hero-slide>
+      <div class="hero-copy reveal">
+        <div class="kicker"><span class="kicker-dot"></span>Только оригинальные препараты</div>
+        <h1 class="hero-title">Препараты для косметологов, которым можно доверять</h1>
+        <p class="hero-sub">PDRN, PLLA и филлеры напрямую от поставщика. Без посредников, без подделок. Доставка по Бишкеку.</p>
+        <div class="hero-actions">
+          <a href="{% url 'store:catalog' %}" class="btn btn-blue">Смотреть каталог</a>
+          <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn-link-underline">Написать менеджеру</a>
+        </div>
+      </div>
+      <div class="hero-media-row reveal reveal-delay-1">
+        {% if hero_image %}
+          <img src="{{ hero_image.url }}" alt="Dr. Isana">
+        {% else %}
+          <img src="{% static 'store/img/hero.png' %}" alt="Dr. Isana">
+        {% endif %}
+        <div class="hero-stat">
+          <span class="hero-stat-num">100%</span>
+          <span class="hero-stat-label">оригинал</span>
+        </div>
       </div>
     </div>
-    <div class="hero-media-row reveal reveal-delay-1">
-      {% if hero_image %}
-        <img src="{{ hero_image.url }}" alt="Dr. Isana">
-      {% else %}
-        <img src="{% static 'store/img/hero.png' %}" alt="Dr. Isana">
-      {% endif %}
-      <div class="hero-stat">
-        <span class="hero-stat-num">100%</span>
-        <span class="hero-stat-label">оригинал</span>
+
+    <div class="hero-inner hero-slide" data-hero-slide>
+      <div class="hero-copy">
+        <div class="kicker"><span class="kicker-dot"></span>Быстрая доставка</div>
+        <h1 class="hero-title">Доставка по Бишкеку день в день</h1>
+        <p class="hero-sub">Оформляете заказ через WhatsApp — привозим в тот же день. Перед заказом можно проконсультироваться с менеджером.</p>
+        <div class="hero-actions">
+          <a href="{% url 'store:catalog' %}" class="btn btn-blue">Смотреть каталог</a>
+          <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn-link-underline">Написать менеджеру</a>
+        </div>
+      </div>
+      <div class="hero-media-row">
+        <div class="hero-illustration">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"></path><path d="M3 7v10l9 4 9-4V7"></path><path d="M12 11v10"></path></svg>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">День</span>
+          <span class="hero-stat-label">в день</span>
+        </div>
       </div>
     </div>
+
+    <div class="hero-inner hero-slide" data-hero-slide>
+      <div class="hero-copy">
+        <div class="kicker"><span class="kicker-dot"></span>Работаем напрямую</div>
+        <h1 class="hero-title">Без посредников и подделок</h1>
+        <p class="hero-sub">Закупаем PDRN, PLLA и филлеры напрямую у поставщика — без перекупщиков и сомнительных партий.</p>
+        <div class="hero-actions">
+          <a href="{% url 'store:catalog' %}" class="btn btn-blue">Смотреть каталог</a>
+          <a href="https://wa.me/996502259797" target="_blank" rel="noopener" class="btn-link-underline">Написать менеджеру</a>
+        </div>
+      </div>
+      <div class="hero-media-row">
+        <div class="hero-illustration">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">0</span>
+          <span class="hero-stat-label">подделок</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="hero-arrow hero-arrow-prev" aria-label="Предыдущий слайд" data-hero-prev>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+  </button>
+  <button type="button" class="hero-arrow hero-arrow-next" aria-label="Следующий слайд" data-hero-next>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+  </button>
+
+  <div class="hero-dots">
+    <button type="button" class="hero-dot is-active" aria-label="Слайд 1" data-hero-dot data-index="0"></button>
+    <button type="button" class="hero-dot" aria-label="Слайд 2" data-hero-dot data-index="1"></button>
+    <button type="button" class="hero-dot" aria-label="Слайд 3" data-hero-dot data-index="2"></button>
   </div>
 </section>
 
