@@ -24,12 +24,16 @@
     return div.innerHTML;
   }
 
-  function addToCart(id, name, price, image, qty) {
+  function mutateCart(id, name, price, image, qty) {
     qty = parseInt(qty, 10) || 1;
     var cart = getCart();
     if (cart[id]) cart[id].qty += qty;
     else cart[id] = { id: id, name: name, price: Number(price), qty: qty, image: image || '' };
     saveCart(cart);
+  }
+
+  function addToCart(id, name, price, image, qty) {
+    mutateCart(id, name, price, image, qty);
     openCart();
   }
 
@@ -213,6 +217,20 @@
     initSearch();
 
     document.addEventListener('click', function (e) {
+      var buyNowBtn = e.target.closest('[data-buy-now]');
+      if (buyNowBtn) {
+        e.preventDefault();
+        var buyQty = 1;
+        var buyScope = buyNowBtn.closest('[data-qty-scope]');
+        if (buyScope) {
+          var buyQtyValueEl = buyScope.querySelector('[data-qty-value]');
+          if (buyQtyValueEl) buyQty = parseInt(buyQtyValueEl.textContent, 10) || 1;
+        }
+        mutateCart(buyNowBtn.dataset.id, buyNowBtn.dataset.name, buyNowBtn.dataset.price, buyNowBtn.dataset.image, buyQty);
+        openCheckout();
+        return;
+      }
+
       var addBtn = e.target.closest('[data-add-to-cart]');
       if (addBtn) {
         e.preventDefault();

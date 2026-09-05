@@ -19,8 +19,9 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--navy); font-family: var(--font); }
+html { scroll-behavior: smooth; height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--navy); font-family: var(--font); min-height: 100%; display: flex; flex-direction: column; }
+main { flex: 1 0 auto; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 button, input { font-family: var(--font); }
@@ -216,14 +217,15 @@ details > summary::-webkit-details-marker { display: none; }
 .detail-price { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 28px; }
 .detail-price del { font-size: 16px; color: var(--text-faint); font-weight: 400; margin-left: 10px; }
 
-.detail-price-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.detail-price-row .detail-price { margin-bottom: 0; }
 .detail-stock {
-  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
-  color: var(--navy); background: var(--bg-blue); padding: 6px 12px; border-radius: 999px; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  color: var(--navy); background: var(--bg-blue); padding: 6px 12px; border-radius: 999px;
+  white-space: nowrap; margin-bottom: 22px;
 }
 
-.detail-buy-row { display: flex; align-items: center; gap: 14px; margin: 24px 0 18px; }
+.detail-buy-block { border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+.detail-price-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.detail-price-row .detail-price { margin-bottom: 0; }
 .qty-stepper {
   display: flex; align-items: center; gap: 2px; border: 1px solid var(--border-2); border-radius: 999px;
   padding: 4px; flex-shrink: 0;
@@ -235,9 +237,31 @@ details > summary::-webkit-details-marker { display: none; }
 }
 .qty-stepper-btn:hover { background: var(--bg-blue); }
 .qty-stepper-value { min-width: 28px; text-align: center; font-size: 14px; font-weight: 700; color: var(--navy); }
-.detail-buy-row .add-btn-pill { flex: 1; width: auto; }
 
-.detail-ask-link { display: inline-block; margin-bottom: 8px; }
+.detail-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+.buy-now-btn, .add-cart-btn-outline {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+  border-radius: 999px; padding: 16px; font-size: 15px; font-weight: 800; cursor: pointer;
+  font-family: var(--font); transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.buy-now-btn svg, .add-cart-btn-outline svg { width: 18px; height: 18px; flex-shrink: 0; }
+.buy-now-btn {
+  background: var(--navy); color: #FFFFFF; border: none;
+}
+.buy-now-btn svg { fill: #FFFFFF; }
+.buy-now-btn:hover { background: var(--blue); }
+.buy-now-btn:active { transform: scale(0.98); }
+.add-cart-btn-outline {
+  background: #FFFFFF; color: var(--navy); border: 1px solid var(--border-2);
+}
+.add-cart-btn-outline svg { fill: none; stroke: var(--navy); stroke-width: 1.8; }
+.add-cart-btn-outline:hover { background: var(--bg-blue); border-color: var(--blue); }
+.add-cart-btn-outline:active { transform: scale(0.98); }
+
+.detail-ask-link {
+  display: block; text-align: center; margin-top: 16px; font-size: 13px; font-weight: 700;
+  color: var(--navy); text-decoration: underline; text-underline-offset: 3px;
+}
 
 /* ===== About page ===== */
 .about-page { max-width: 900px; margin: 0 auto; padding: 64px 32px 110px; }
@@ -354,8 +378,6 @@ details > summary::-webkit-details-marker { display: none; }
   .product-grid, .reviews-grid, .before-after-grid { grid-template-columns: 1fr 1fr; }
   .product-detail { grid-template-columns: 1fr; gap: 32px; }
   .detail-image img { height: 320px; }
-  .detail-buy-row { flex-direction: column; align-items: stretch; }
-  .detail-buy-row .qty-stepper { align-self: center; }
   .about-page { padding: 40px 20px 64px; }
   .about-grid { grid-template-columns: 1fr; gap: 28px; }
   .about-title, .catalog-title, .reviews-title { font-size: 28px; }
