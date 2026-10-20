@@ -2,6 +2,7 @@ gunicorn
 psycopg2-binary
 whitenoise
 dj-database-url
+python-dotenv
 Pillow
 django-storages
 boto3

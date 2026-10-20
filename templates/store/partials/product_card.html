@@ -5,7 +5,7 @@
       {% if product.image %}
         <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
       {% else %}
-        <img src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}" loading="lazy">
+        <img src="{% static 'store/img/placeholder.svg' %}" alt="{{ product.name }}" loading="lazy">
       {% endif %}
     </a>
     {% if product.get_category_display %}
@@ -32,7 +32,7 @@
       data-id="{{ product.id }}"
       data-name="{{ product.name }}"
       data-price="{{ product.price }}"
-      data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.jpg' %}{% endif %}"
+      data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.svg' %}{% endif %}"
     >
       <span>В корзину</span>
       <span class="cart-icon-wrap">

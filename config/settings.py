@@ -5,18 +5,30 @@ Django settings for config project.
 import os
 from pathlib import Path
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Локально переменные читаются из .env, на проде — из настроек хостинга
+load_dotenv(BASE_DIR / '.env')
 
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY',
-    'django-insecure-uf_r6kkz2mt**xvzk3bmpp6owm06dmten^u(dma=zjtndpvz=g'
-)
+DEBUG = os.environ.get('DEBUG') == 'True'
 
-DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = 'django-insecure-local-dev'
+    else:
+        raise ImproperlyConfigured('Не задана переменная окружения SECRET_KEY')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get('ALLOWED_HOSTS', '').split(',')
+    if host.strip()
+]
+if DEBUG and not ALLOWED_HOSTS:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 
 INSTALLED_APPS = [

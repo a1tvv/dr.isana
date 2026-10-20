@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Product
+from .models import BeforeAfter, Product, Review
 
 admin.site.site_header = 'Dr. Isana — админка'
 admin.site.site_title = 'Dr. Isana'
@@ -67,3 +67,23 @@ class ProductAdmin(admin.ModelAdmin):
             )
         return 'Фото ещё не загружено'
     image_preview.short_description = 'Предпросмотр'
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('name', 'quote', 'created_at')
+    search_fields = ('name', 'quote')
+
+
+@admin.register(BeforeAfter)
+class BeforeAfterAdmin(admin.ModelAdmin):
+    list_display = ('preview', 'created_at')
+
+    def preview(self, obj):
+        return format_html(
+            '<img src="{}" style="width:48px;height:48px;object-fit:cover;border-radius:8px;"> '
+            '<img src="{}" style="width:48px;height:48px;object-fit:cover;border-radius:8px;">',
+            obj.before.url,
+            obj.after.url,
+        )
+    preview.short_description = 'До / После'

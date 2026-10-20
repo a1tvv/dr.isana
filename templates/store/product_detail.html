@@ -7,7 +7,7 @@
     {% if product.image %}
       <img src="{{ product.image.url }}" alt="{{ product.name }}">
     {% else %}
-      <img src="{% static 'store/img/placeholder.jpg' %}" alt="{{ product.name }}">
+      <img src="{% static 'store/img/placeholder.svg' %}" alt="{{ product.name }}">
     {% endif %}
   </div>
   <div>
@@ -40,7 +40,7 @@
           data-id="{{ product.id }}"
           data-name="{{ product.name }}"
           data-price="{{ product.price }}"
-          data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.jpg' %}{% endif %}"
+          data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.svg' %}{% endif %}"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13 2 3 14h6l-1 8 11-14h-7l1-6z"></path></svg>
           <span>Купить сейчас</span>
@@ -52,7 +52,7 @@
           data-id="{{ product.id }}"
           data-name="{{ product.name }}"
           data-price="{{ product.price }}"
-          data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.jpg' %}{% endif %}"
+          data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/img/placeholder.svg' %}{% endif %}"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
           <span>Добавить в корзину</span>

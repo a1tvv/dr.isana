@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import BeforeAfter, Product, Review
 
 
 def home(request):
@@ -42,4 +42,9 @@ def about(request):
 
 
 def reviews(request):
-    return render(request, 'store/reviews.html', {'active_page': 'reviews'})
+    context = {
+        'active_page': 'reviews',
+        'reviews': Review.objects.all(),
+        'before_after_pairs': BeforeAfter.objects.all(),
+    }
+    return render(request, 'store/reviews.html', context)
