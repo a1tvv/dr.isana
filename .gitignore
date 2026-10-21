@@ -1,6 +1,14 @@
 venv/
+.venv/
 db.sqlite3
 __pycache__/
 *.pyc
 .env
 uploads/
+
+# macOS
+.DS_Store
+
+# копии файлов, которые создаёт iCloud/Finder: "style 2.css", "LICENSE 2"
+* [0-9].*
+* [0-9]
